@@ -8,7 +8,7 @@ public class DownloadYahooTest {
 
 	public static void main(String[] args) throws IOException {
 		// Read an http resource in to a stream
-		String tAddress = "http://finance.yahoo.com/d/quotes.csv?s=GOOG,IBM,NX,MM,AAPL,%40%5EGDAXI&f=l1n0";
+		String tAddress = "http://finance.yahoo.com/d/quotes.csv?s=GOOG,IBM,NX,MM,AAPL&f=l1n0";
 		URL tDocument = new URL(tAddress);
 		URLConnection tConnection = tDocument.openConnection();
 		tConnection.connect();
@@ -25,9 +25,7 @@ public class DownloadYahooTest {
 				System.out.println(Wert + "  " + name);
 			} catch (Exception e) {
 				System.out.println("Yaaay (k)ein Fehler!!");
-			} finally {
-
-			}
+			} 
 
 		}
 
