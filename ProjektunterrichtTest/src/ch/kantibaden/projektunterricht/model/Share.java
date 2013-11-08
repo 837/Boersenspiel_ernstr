@@ -15,6 +15,10 @@ public class Share {
 		this.currentValue = currentValue;
 	}
 
+	public void setCurrentValue(BigDecimal currentValue) {
+		this.currentValue = currentValue;
+	}
+
 	public BigDecimal getCurrentValue() {
 		return currentValue;
 	}
