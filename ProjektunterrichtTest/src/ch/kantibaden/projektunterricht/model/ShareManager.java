@@ -15,17 +15,14 @@ import java.util.ArrayList;
 
 public class ShareManager {
 
-	private ArrayList<Share>	allSharesList	= new ArrayList<Share>();
-	private final String		ALL_SHARES		= "%40%5EDJI,%40%5EGDAXI,GOOG";
+	private ArrayList<Share> allSharesList = new ArrayList<Share>();
+	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
 
 	public static void main(String[] args) throws IOException {
 		ShareManager manager = new ShareManager();
 		manager.downloadAllShares();
 
-		manager.downloadSingleShare('"' + "GOOG" + '"');
-
-		manager.downloadSingleShareImage("GOOG");
-		manager.downloadSingleShareImage("V");
+		
 	}
 
 	private void downloadAllShares() throws IOException {
@@ -56,10 +53,10 @@ public class ShareManager {
 		}
 	}
 
-	private void downloadSingleShare(String shareSymbol) throws IOException {
+	private void downloadSingleShare(Share share) throws IOException {
 		// Read an http resource in to a stream
-		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s=" + shareSymbol
-				+ "&f=l1s0n0&e=.csv";
+		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s="
+				+ share.getShareSymbol() + "&f=l1s0n0&e=.csv";
 		URL tDocument = new URL(tAddress);
 		URLConnection tConnection = tDocument.openConnection();
 		tConnection.connect();
@@ -72,11 +69,12 @@ public class ShareManager {
 
 			try {
 				for (Share shareObj : allSharesList) {
-					if (shareObj.getShareSymbol().equals(shareSymbol)) {
+					if (shareObj.getShareSymbol().equals(share.getShareSymbol())) {
 						shareObj.setCurrentValue(new BigDecimal(splittedLine[0]));
 						System.out.println("Single Share Updated: " + shareObj.getShareName()
 								+ "  " + shareObj.getShareSymbol() + "  "
 								+ shareObj.getCurrentValue());
+						break;
 					}
 				}
 			} catch (Exception e) {
@@ -85,11 +83,11 @@ public class ShareManager {
 		}
 	}
 
-	private void downloadSingleShareImage(String shareSymbol) throws IOException {
+	private void downloadSingleShareImage(Share share) throws IOException {
 
 		try {
-			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + shareSymbol
-					+ "&t=6m&q=l&l=on&z=l&p=m20,m50,m200");
+			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + share.getShareSymbol()
+					+ "&t=2m&q=l&l=on&z=l&p=m20,m50,m200");
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buf = new byte[1024];
@@ -102,7 +100,8 @@ public class ShareManager {
 			byte[] response = out.toByteArray();
 
 			// save image
-			FileOutputStream fos = new FileOutputStream("Charts\\" + shareSymbol + "_Chart.png");
+			FileOutputStream fos = new FileOutputStream("Charts\\" + share.getShareSymbol()
+					+ "_Chart.png");
 			fos.write(response);
 			fos.close();
 
