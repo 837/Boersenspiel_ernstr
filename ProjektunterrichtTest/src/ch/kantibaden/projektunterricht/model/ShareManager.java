@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ShareManager {
 	private ArrayList<Share> allSharesList = new ArrayList<Share>();
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
-	private final int VALUE = 10000000;
+	private final int VALUE = 10000000;//Nur für tests
 
 	public static void main(String[] args) throws IOException {
 		ShareManager manager = new ShareManager();
@@ -73,21 +73,18 @@ public class ShareManager {
 
 			try {
 				for (Share shareObj : allSharesList) {
-					if (shareObj.getShareSymbol().contains(shareSymbol)) {
-						// Wert zu beginn
+					if (shareObj.getShareSymbol().contains(shareSymbol)/*
+																		 * Hier
+																		 * bessere
+																		 * Lösung
+																		 * !
+																		 * contains
+																		 * ungünstig
+																		 */) {
+						shareObj.setCurrentValue(new BigDecimal(splittedLine[0]));
 						System.out.println(shareObj.getShareName() + "  "
 								+ shareObj.getShareSymbol() + "  "
 								+ shareObj.getCurrentValue());
-
-						// shareObj.setCurrentValue(new
-						// BigDecimal(splittedLine[0]));
-						shareObj.setCurrentValue(new BigDecimal(VALUE));
-
-						// wert nach änderung
-						System.out.println(shareObj.getShareName() + "  "
-								+ shareObj.getShareSymbol() + "  "
-								+ shareObj.getCurrentValue());
-
 					}
 				}
 			} catch (Exception e) {
