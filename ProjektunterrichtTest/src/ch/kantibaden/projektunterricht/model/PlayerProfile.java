@@ -6,18 +6,18 @@ import java.util.ArrayList;
 
 public class PlayerProfile {
 
-	String name;
-	String email;
-	String password;
-	BigDecimal beginningBalance;
-	BigDecimal balance;
-	ArrayList<Share> ownedShares;
+	private String name;
+	private String email;
+	private String password;
+	private BigDecimal beginningBalance;
+	private BigDecimal balance;
+	private ArrayList<Share> ownedShares;
 
-	public PlayerProfile(String name, String email, String password, BigDecimal beginningBalance) {
+	public PlayerProfile(String name, String email, String password, int beginningBalance) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.beginningBalance = beginningBalance;
+		this.beginningBalance = new BigDecimal(beginningBalance);
 
 	}
 

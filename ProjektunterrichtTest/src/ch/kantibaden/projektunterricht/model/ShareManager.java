@@ -18,11 +18,13 @@ public class ShareManager {
 	private ArrayList<Share> allSharesList = new ArrayList<Share>();
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
 
-	public static void main(String[] args) throws IOException {
-		ShareManager manager = new ShareManager();
-		manager.downloadAllShares();
+	public ShareManager() throws IOException {
+		downloadAllShares();// STARTING SHARES
 
-		
+		// DOWNLOAD FOR EACH SHARE THE CHART
+		for (Share shareObj : allSharesList) {
+			downloadSingleShareImage(shareObj);
+		}
 	}
 
 	private void downloadAllShares() throws IOException {
@@ -86,8 +88,9 @@ public class ShareManager {
 	private void downloadSingleShareImage(Share share) throws IOException {
 
 		try {
-			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + share.getShareSymbol()
+			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + share.getShareSymbol().replace('\"', ' ').replaceAll(" ", "")
 					+ "&t=2m&q=l&l=on&z=l&p=m20,m50,m200");
+	
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buf = new byte[1024];
@@ -100,13 +103,15 @@ public class ShareManager {
 			byte[] response = out.toByteArray();
 
 			// save image
-			FileOutputStream fos = new FileOutputStream("Charts\\" + share.getShareSymbol()
+			FileOutputStream fos = new FileOutputStream("Charts\\" + share.getShareSymbol().replace('\"', ' ')
 					+ "_Chart.png");
 			fos.write(response);
 			fos.close();
 
+			System.out.println("Chart für " + share.getShareSymbol()+" heruntergeladen.");
 		} catch (IOException e) {
-			System.out.println("Ein Fehler!! in downloadSingleShareImage " + e);
+			System.out.println("Ein Fehler!! in downloadSingleShareImage " + share.getShareSymbol()
+					+ "   " + e);
 		}
 	}
 }
