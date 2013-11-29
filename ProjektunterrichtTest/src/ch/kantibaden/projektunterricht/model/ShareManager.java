@@ -26,6 +26,10 @@ public class ShareManager {
 			downloadShareImage(shareObj);
 		}
 	}
+	
+	public ArrayList<Share> getShares(){
+		return shares;
+	}
 
 	private void downloadAllShares() throws IOException {
 		// Read an http resource in to a stream
@@ -40,7 +44,7 @@ public class ShareManager {
 		String line;
 		while ((line = bufferedCSV.readLine()) != null) {
 			String[] splittedLine = line.split(",");
-
+				//TODO: overwrite existing shares!
 			try {
 				shares.add(new Share(splittedLine[2], splittedLine[1], new BigDecimal(splittedLine[0])));
 			} catch (Exception e) {
