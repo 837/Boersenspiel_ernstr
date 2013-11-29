@@ -3,32 +3,32 @@ package ch.kantibaden.projektunterricht.model;
 import java.math.BigDecimal;
 
 public class Share {
-	private BigDecimal currentValue;
+	private BigDecimal value;
 	// Full share name
-	private String shareName;
+	private String name;
 	// Short share name
-	private String shareSymbol;
+	private String symbol;
 
-	public Share(String shareName, String shareSymbol, BigDecimal currentValue) {
-		this.shareName = shareName;
-		this.shareSymbol = shareSymbol;
-		this.currentValue = currentValue;
+	public Share(String name, String symbol, BigDecimal value) {
+		this.name = name;
+		this.symbol = symbol;
+		this.value = value;
 	}
 
-	public void setCurrentValue(BigDecimal currentValue) {
-		this.currentValue = currentValue;
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
-	public BigDecimal getCurrentValue() {
-		return currentValue;
+	public BigDecimal getValue() {
+		return value;
 	}
 
-	public String getShareName() {
-		return shareName;
+	public String getName() {
+		return name;
 	}
 
-	public String getShareSymbol() {
-		return shareSymbol;
+	public String getSymbol() {
+		return symbol;
 	}
 
 }

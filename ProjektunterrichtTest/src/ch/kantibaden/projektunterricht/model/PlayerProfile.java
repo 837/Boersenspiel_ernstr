@@ -21,7 +21,6 @@ public class PlayerProfile {
 
 	}
 
-	
 	/**
 	 * @return the name
 	 */
@@ -29,15 +28,14 @@ public class PlayerProfile {
 		return name;
 	}
 
-	
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
 	/**
 	 * @return the email
 	 */
@@ -45,15 +43,14 @@ public class PlayerProfile {
 		return email;
 	}
 
-	
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	
 	/**
 	 * @return the password
 	 */
@@ -61,15 +58,14 @@ public class PlayerProfile {
 		return password;
 	}
 
-	
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	
 	/**
 	 * @return the balance
 	 */
@@ -77,15 +73,14 @@ public class PlayerProfile {
 		return balance;
 	}
 
-	
 	/**
-	 * @param balance the balance to set
+	 * @param balance
+	 *            the balance to set
 	 */
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 
-	
 	/**
 	 * @return the ownedShares
 	 */
@@ -93,15 +88,14 @@ public class PlayerProfile {
 		return ownedShares;
 	}
 
-	
 	/**
-	 * @param ownedShares the ownedShares to set
+	 * @param ownedShares
+	 *            the ownedShares to set
 	 */
 	public void setOwnedShares(ArrayList<Share> ownedShares) {
 		this.ownedShares = ownedShares;
 	}
 
-	
 	/**
 	 * @return the beginningBalance
 	 */
