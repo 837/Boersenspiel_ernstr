@@ -4,10 +4,8 @@ import java.math.BigDecimal;
 
 public class Share {
 	private BigDecimal value;
-	// Full share name
 	private String name;
-	// Short share name
-	private String symbol;
+	private String symbol;//the name by which the share is referenced to when downloading from Yahoo
 
 	public Share(String name, String symbol, BigDecimal value) {
 		this.name = name;
