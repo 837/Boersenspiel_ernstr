@@ -29,21 +29,18 @@ public class ShareManager {
 
 	private void downloadAllShares() throws IOException {
 		// Read an http resource in to a stream
-		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES
-				+ "&f=l1s0n0&e=.csv";
+		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES + "&f=l1s0n0&e=.csv";
 		URL tDocument = new URL(tAddress);
 		URLConnection tConnection = tDocument.openConnection();
 		tConnection.connect();
-		BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(
-				tDocument.openStream()));
+		BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(tDocument.openStream()));
 
 		String line;
 		while ((line = tBufferedReader.readLine()) != null) {
 			String[] splittedLine = line.split(",");
 
 			try {
-				allSharesList.add(new Share(splittedLine[2], splittedLine[1], new BigDecimal(
-						splittedLine[0])));
+				allSharesList.add(new Share(splittedLine[2], splittedLine[1], new BigDecimal(splittedLine[0])));
 			} catch (Exception e) {
 				System.out.println("Yaaay (k)ein Fehler!! in downloadAllShares " + e);
 			}
@@ -57,13 +54,12 @@ public class ShareManager {
 
 	private void downloadSingleShare(Share share) throws IOException {
 		// Read an http resource in to a stream
-		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s="
-				+ share.getShareSymbol() + "&f=l1s0n0&e=.csv";
+		String tAddress = "http://download.finance.yahoo.com/d/quotes.csv?s=" + share.getShareSymbol()
+				+ "&f=l1s0n0&e=.csv";
 		URL tDocument = new URL(tAddress);
 		URLConnection tConnection = tDocument.openConnection();
 		tConnection.connect();
-		BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(
-				tDocument.openStream()));
+		BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(tDocument.openStream()));
 
 		String line;
 		while ((line = tBufferedReader.readLine()) != null) {
@@ -73,9 +69,8 @@ public class ShareManager {
 				for (Share shareObj : allSharesList) {
 					if (shareObj.getShareSymbol().equals(share.getShareSymbol())) {
 						shareObj.setCurrentValue(new BigDecimal(splittedLine[0]));
-						System.out.println("Single Share Updated: " + shareObj.getShareName()
-								+ "  " + shareObj.getShareSymbol() + "  "
-								+ shareObj.getCurrentValue());
+						System.out.println("Single Share Updated: " + shareObj.getShareName() + "  "
+								+ shareObj.getShareSymbol() + "  " + shareObj.getCurrentValue());
 						break;
 					}
 				}
@@ -86,11 +81,11 @@ public class ShareManager {
 	}
 
 	private void downloadSingleShareImage(Share share) throws IOException {
-
 		try {
-			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + share.getShareSymbol().replace('\"', ' ').replaceAll(" ", "")
+			URL url = new URL("http://chart.finance.yahoo.com/z?s="
+					+ share.getShareSymbol().replace('\"', ' ').replaceAll(" ", "")
 					+ "&t=2m&q=l&l=on&z=l&p=m20,m50,m200");
-	
+
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buf = new byte[1024];
@@ -108,10 +103,9 @@ public class ShareManager {
 			fos.write(response);
 			fos.close();
 
-			System.out.println("Chart für " + share.getShareSymbol()+" heruntergeladen.");
+			System.out.println("Chart für " + share.getShareSymbol() + " heruntergeladen.");
 		} catch (IOException e) {
-			System.out.println("Ein Fehler!! in downloadSingleShareImage " + share.getShareSymbol()
-					+ "   " + e);
+			System.out.println("Ein Fehler!! in downloadSingleShareImage " + share.getShareSymbol() + "   " + e);
 		}
 	}
 }
