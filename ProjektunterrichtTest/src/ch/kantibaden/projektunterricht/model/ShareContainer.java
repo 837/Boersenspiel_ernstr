@@ -13,6 +13,11 @@ public class ShareContainer {
 		this.amount = amount;
 		this.payedPrice = share.getValue().multiply(new BigDecimal(amount));
 	}
+	public ShareContainer(ShareContainer shares){//Copy constructor
+		this.share = shares.getShare();
+		this.amount = shares.getAmount();
+		this.payedPrice =new BigDecimal( shares.getPayedPrice().toString());
+	}
 
 	public Share getShare() {
 		return share;
