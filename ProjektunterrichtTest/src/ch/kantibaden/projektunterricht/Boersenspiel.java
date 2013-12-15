@@ -27,6 +27,14 @@ public class Boersenspiel {
 			System.out.println("Fehler in Boersenspiel.java manager=new ShareManager()");
 			e.printStackTrace();
 		}
+		System.out.println("starting refresh...");
+		try {
+			manager.refreshAll();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("refresh done!");
 	}
 
 }

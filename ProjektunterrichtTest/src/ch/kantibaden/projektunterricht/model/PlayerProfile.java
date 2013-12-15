@@ -107,7 +107,7 @@ public class PlayerProfile {
 		boolean couldSell = false;
 		
 		for (ShareContainer currentShare : ownedShares) {
-			if (currentShare.getShare() == shareToSell) {// this works because it references the same object
+			if (currentShare.getShare() == shareToSell) {// this works because they reference the same object
 				couldSell = currentShare.sell(amount);//could sell that many shares?
 				if (currentShare.isEmpty()) {
 					ownedShares.remove(shareToSell);// not sure if this works

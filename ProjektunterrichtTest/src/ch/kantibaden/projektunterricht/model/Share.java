@@ -36,6 +36,7 @@ public class Share {
 	}
 	
 	public void update() throws IOException {
+		System.out.println("updating " + symbol);
 		String downloadLink = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=l1&e=.csv";
 		URL url = new URL(downloadLink);
 		URLConnection connection = url.openConnection();
@@ -72,7 +73,7 @@ public class Share {
 			
 			System.out.println("Chart für " + symbol + " heruntergeladen.");
 		} catch (IOException e) {
-			System.out.println("Ein Fehler!! in downloadSingleShareImage " + symbol + "   " + e);
+			System.out.println("Ein Fehler!! in downloadImage " + symbol + "   " + e);
 		}
 	}
 	

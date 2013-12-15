@@ -20,6 +20,7 @@ public class ShareManager {
 	public ShareManager() throws IOException {
 		// download all shares
 		String downloadLink = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES + "&f=l1s0n0&e=.csv";
+		System.out.println(downloadLink);
 		URL url = new URL(downloadLink);
 		URLConnection connection = url.openConnection();
 		connection.connect();
@@ -27,21 +28,22 @@ public class ShareManager {
 		
 		String line;
 		while ((line = bufferedCSV.readLine()) != null) {
+			System.out.println(line);
 			String[] splittedLine = line.split(",");
 			try {
 				shares.add(new Share(splittedLine[2], splittedLine[1], new BigDecimal(splittedLine[0])));
 			} catch (Exception e) {
-				System.out.println("failed adding " + splittedLine[2] + " : " + e);
+				System.out.println("failed adding " + line + " : " + e);
 			}
 		}
 		
-		for (Share shareObj : shares) {
-			System.out.println(shareObj.getName() + "  " + shareObj.getSymbol() + "  " + shareObj.getValue());
+		for (Share currentShare : shares) {
+			System.out.println(currentShare.getName() + "  " + currentShare.getSymbol() + "  " + currentShare.getValue());
 		}
 		
 		// DOWNLOAD FOR EACH SHARE THE CHART
 		for (Share currentShare : shares) {
-			currentShare.downloadImage();
+			//currentShare.downloadImage();
 		}
 	}
 	
@@ -49,7 +51,7 @@ public class ShareManager {
 		return shares;
 	}
 	
-	private void refreshAll() throws IOException {
+	public void refreshAll() throws IOException {
 		for (Share currentShare : shares) {
 			currentShare.update();
 		}
