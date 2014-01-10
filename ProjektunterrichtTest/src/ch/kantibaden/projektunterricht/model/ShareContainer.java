@@ -25,12 +25,14 @@ public class ShareContainer {
 		setAmount(amount);
 	}
 	
-	public boolean sell(int amount) {
+	public int sell(int amount) {
 		if (this.amount > amount) {
-			return false;
+			int actualAmount = this.amount;
+			setAmount(-actualAmount);
+			return actualAmount;
 		}
 		setAmount(-amount);
-		return true;
+		return amount;
 	}
 	
 	private void setAmount(int amount) {
