@@ -2,6 +2,7 @@ package ch.kantibaden.projektunterricht.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PlayerProfile {
 	
@@ -116,12 +117,15 @@ public class PlayerProfile {
 	public boolean sell(Share shareToSell, int amount) {
 		boolean couldSell = false;
 		int actuallySoldAmount = 0;
-		for (ShareContainer currentShare : ownedShares) {
+		
+		
+		for (Iterator<ShareContainer> it = ownedShares.iterator(); it.hasNext();) {
+			ShareContainer currentShare = it.next();
 			if (currentShare.getShare() == shareToSell) {// this works because they reference the same object
 				actuallySoldAmount = currentShare.sell(amount);//could sell that many shares?
 				couldSell = true;
 				if (currentShare.isEmpty()) {
-					ownedShares.remove(shareToSell);// not sure if this works
+					ownedShares.remove(shareToSell);
 				}
 				break;
 			}
