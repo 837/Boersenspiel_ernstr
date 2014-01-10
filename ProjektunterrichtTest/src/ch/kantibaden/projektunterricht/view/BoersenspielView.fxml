@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="399.0" prefWidth="556.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ch.kantibaden.projektunterricht.controller.Controller">
+  <children>
+    <BorderPane prefHeight="399.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+        <SplitPane dividerPositions="0.5090252707581228" focusTraversable="true" prefHeight="367.0" prefWidth="520.0">
+          <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+              <children>
+                <TabPane prefHeight="365.0" prefWidth="261.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <tabs>
+                    <Tab text="Home">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <Label fx:id="lblStartkapital" layoutY="14.0" text="Startkapital: " AnchorPane.leftAnchor="14.009765625" />
+                            <Label fx:id="lblMomentanesKapital" layoutY="37.5" text="Momentanes Kapital: " AnchorPane.leftAnchor="14.009765625" />
+                            <Label fx:id="lblWertAllerAktien" layoutY="61.5" text="Wert aller Aktien: " AnchorPane.leftAnchor="14.01953125" />
+                            <Label fx:id="" text="Meine Aktien" AnchorPane.leftAnchor="14.01953125" AnchorPane.topAnchor="99.5" />
+                            <TableView fx:id="tvMeineAktien" prefHeight="236.0" prefWidth="259.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="122.0">
+                              <columns>
+                                <TableColumn prefWidth="75.0" text="Symbol" />
+                                <TableColumn prefWidth="75.0" text="Name" />
+                                <TableColumn prefWidth="75.0" text="Kurs" />
+                              </columns>
+                            </TableView>
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                    <Tab text="Alle Aktien">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TableView fx:id="tvAlleAktien" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                              <columns>
+                                <TableColumn prefWidth="75.0" text="Symbol" />
+                                <TableColumn prefWidth="75.0" text="Name" />
+                                <TableColumn prefWidth="75.0" text="Kurs" />
+                              </columns>
+                            </TableView>
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                  </tabs>
+                </TabPane>
+              </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="365.0" prefWidth="276.0">
+              <children>
+                <TabPane prefHeight="397.0" prefWidth="269.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <tabs>
+                    <Tab text="Details Aktie">
+                      <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <Button fx:id="btKaufen" layoutX="92.0" mnemonicParsing="false" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
+                            <Button fx:id="btVerkaufen" layoutX="174.0" mnemonicParsing="false" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
+                            <TextField fx:id="txtAmount" layoutX="13.0" prefHeight="25.0" prefWidth="49.0" AnchorPane.bottomAnchor="14.0" />
+                            <Label fx:id="lblDetailSymbol" layoutX="14.0048828125" layoutY="14.0" text="Symbol: " />
+                            <Label fx:id="lblDetailName" layoutX="14.009765625" layoutY="39.5" text="Name: " />
+                            <Label fx:id="lblDetailKurs" layoutX="14.0048828125" layoutY="64.5" text="Kurs: " />
+                            <Label fx:id="lblDetailAnzahl" layoutX="14.0" layoutY="88.0" text="Anzahl die ich besitze: " />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </Tab>
+                  </tabs>
+                </TabPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </center>
+      <top>
+        <MenuBar>
+          <menus>
+            <Menu mnemonicParsing="false" text="Profil" fx:id="mProfil" />
+            <Menu mnemonicParsing="false" text="Logout" fx:id="mLogout" />
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>
