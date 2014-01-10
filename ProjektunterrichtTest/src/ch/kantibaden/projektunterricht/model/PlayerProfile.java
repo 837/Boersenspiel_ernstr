@@ -73,6 +73,16 @@ public class PlayerProfile {
 		return balance;
 	}
 	
+	public BigDecimal getTotalShareValue(){
+		BigDecimal totalValue = new BigDecimal(0);
+		
+		for (ShareContainer currentShare : ownedShares){
+			totalValue.add(currentShare.getShare().getValue());
+		}
+		
+		return totalValue;
+	}
+	
 	/**
 	 * @return the ownedShares
 	 */
