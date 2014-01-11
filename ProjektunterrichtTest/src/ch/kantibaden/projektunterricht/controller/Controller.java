@@ -28,7 +28,7 @@ public class Controller {
 	private TableView<String> tvAlleAktien;
 	
 	
-	
+	//dd
 	
 	
 	//Details Aktie
