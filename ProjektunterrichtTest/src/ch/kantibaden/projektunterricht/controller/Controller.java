@@ -9,6 +9,7 @@ import ch.kantibaden.projektunterricht.model.ShareManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -30,14 +31,14 @@ public class Controller {
 		//login here
 		player = new PlayerProfile("username_here", "email_here", "password_here", 10000);
 		shares = new ShareManager();
-		for (Share currentShare : shares.getShares()){
-			//tvAlleAktien.getC
-		}
+		
 		tvAlleAktien.getItems().addAll(shares.getShares());
 		tvMeineAktien.getItems().addAll(player.getOwnedShares());
 		
 		lblStartkapital.setText(lblStartkapital.getText() + " " + player.getBeginningBalance().toString()+" CHF");
 		lblMomentanesKapital.setText(lblMomentanesKapital.getText() + " " + player.getBalance().toString()+" CHF");
+		lblWertAllerAktien.setText(lblWertAllerAktien.getText() + " " + player.getTotalShareValue().toString()+" CHF");
+		
 		
 	}
 
@@ -47,44 +48,26 @@ public class Controller {
 	
 	
 	//Home
-	@FXML
-	private Label lblStartkapital;
-	
-	@FXML
-	private Label lblMomentanesKapital;
-	
-	@FXML
-	private Label lblWertAllerAktien;
-	
-	@FXML
-	private TableView<ShareContainer> tvMeineAktien;
-	
+	@FXML private Label lblStartkapital;
+	@FXML private Label lblMomentanesKapital;
+	@FXML private Label lblWertAllerAktien;
+	@FXML private TableView<ShareContainer> tvMeineAktien;
+	@FXML private TableColumn<ShareContainer, String> maSymbol;
+	@FXML private TableColumn<ShareContainer, String> maName;
+	@FXML private TableColumn<ShareContainer, String> maKurs;
 	
 	//Alle Aktien
-	@FXML
-	private TableView<Share> tvAlleAktien;
-	
-	
+	@FXML private TableView<Share> tvAlleAktien;
+	@FXML private TableColumn<Share, String> aaName;
+	@FXML private TableColumn<Share, String> aaSymbol;
+	@FXML private TableColumn<Share, String> aaKurs;
 	
 	//Details Aktie
-	@FXML
-	private Label lblDetailSymbol;
-	
-	@FXML
-	private Label lblDetailName;
-	
-	@FXML
-	private Label lblDetailKurs;
-	
-	@FXML
-	private Label lblDetailAnzahl;
-	
-	@FXML
-	private Button btKaufen;
-	
-	@FXML
-	private Button btVerkaufen;
-	
-	@FXML
-	private TextField txtAmount;
+	@FXML private Label lblDetailSymbol;
+	@FXML private Label lblDetailName;
+	@FXML private Label lblDetailKurs;
+	@FXML private Label lblDetailAnzahl;
+	@FXML private Button btKaufen;
+	@FXML private Button btVerkaufen;
+	@FXML private TextField txtAmount;
 }
