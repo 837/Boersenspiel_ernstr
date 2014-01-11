@@ -22,13 +22,7 @@
                             <Label fx:id="lblMomentanesKapital" layoutY="37.5" text="Momentanes Kapital: " AnchorPane.leftAnchor="14.009765625" />
                             <Label fx:id="lblWertAllerAktien" layoutY="61.5" text="Wert aller Aktien: " AnchorPane.leftAnchor="14.01953125" />
                             <Label fx:id="" text="Meine Aktien" AnchorPane.leftAnchor="14.01953125" AnchorPane.topAnchor="99.5" />
-                            <TableView fx:id="tvMeineAktien" prefHeight="236.0" prefWidth="259.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="122.0">
-                              <columns>
-                                <TableColumn prefWidth="75.0" text="Symbol" fx:id="maSymbol"/>
-                                <TableColumn prefWidth="75.0" text="Name" fx:id="maName"/>
-                                <TableColumn prefWidth="75.0" text="Kurs" fx:id="maKurs"/>
-                              </columns>
-                            </TableView>
+                            <ListView fx:id="lvMeineAktien" prefHeight="200.0" prefWidth="259.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="132.0" />
                           </children>
                         </AnchorPane>
                       </content>
@@ -37,13 +31,7 @@
                       <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                            <TableView fx:id="tvAlleAktien" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                              <columns>
-                                <TableColumn prefWidth="75.0" text="Symbol" fx:id="aaSymbol"/>
-                                <TableColumn prefWidth="75.0" text="Name" fx:id="aaName"/>
-                                <TableColumn prefWidth="75.0" text="Kurs" fx:id="aaKurs"/>
-                              </columns>
-                            </TableView>
+                            <ListView fx:id="lvAlleAktien" prefHeight="322.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                           </children>
                         </AnchorPane>
                       </content>
