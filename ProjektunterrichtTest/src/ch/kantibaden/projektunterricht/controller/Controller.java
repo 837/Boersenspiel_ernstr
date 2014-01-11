@@ -1,5 +1,11 @@
 package ch.kantibaden.projektunterricht.controller;
 
+import java.io.IOException;
+
+import ch.kantibaden.projektunterricht.model.PlayerProfile;
+import ch.kantibaden.projektunterricht.model.Share;
+import ch.kantibaden.projektunterricht.model.ShareContainer;
+import ch.kantibaden.projektunterricht.model.ShareManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,6 +13,37 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class Controller {
+	
+	private PlayerProfile player;
+	private ShareManager shares;
+	
+	
+	
+	//Menu
+	
+	//mProfil  == Action Code muss noch gesetzt werden
+	//mLogout  == Action Code muss noch gesetzt werden
+	
+	
+	@FXML
+	private void initialize() throws IOException {
+		//login here
+		player = new PlayerProfile("username_here", "email_here", "password_here", 10000);
+		shares = new ShareManager();
+		for (Share currentShare : shares.getShares()){
+			//tvAlleAktien.getC
+		}
+		tvAlleAktien.getItems().addAll(shares.getShares());
+		tvMeineAktien.getItems().addAll(player.getOwnedShares());
+		
+		lblStartkapital.setText(lblStartkapital.getText() + " " + player.getBeginningBalance().toString()+" CHF");
+		lblMomentanesKapital.setText(lblMomentanesKapital.getText() + " " + player.getBalance().toString()+" CHF");
+		
+	}
+
+	public Controller() {
+
+	}
 	
 	
 	//Home
@@ -20,15 +57,13 @@ public class Controller {
 	private Label lblWertAllerAktien;
 	
 	@FXML
-	private TableView<String> tvMeineAktien;
+	private TableView<ShareContainer> tvMeineAktien;
 	
 	
 	//Alle Aktien
 	@FXML
-	private TableView<String> tvAlleAktien;
+	private TableView<Share> tvAlleAktien;
 	
-	
-	//dd
 	
 	
 	//Details Aktie
@@ -52,20 +87,4 @@ public class Controller {
 	
 	@FXML
 	private TextField txtAmount;
-	
-	
-	//Menu
-	
-	//mProfil  == Action Code muss noch gesetzt werden
-	//mLogout  == Action Code muss noch gesetzt werden
-	
-	
-	@FXML
-	private void initialize() {
-		//Wird beim aufruf des Controllers ausgeführt, sprich beim start des programmes
-	}
-
-	public Controller() {
-
-	}
 }

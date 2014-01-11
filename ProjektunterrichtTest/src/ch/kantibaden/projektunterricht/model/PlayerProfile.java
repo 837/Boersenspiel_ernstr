@@ -19,7 +19,9 @@ public class PlayerProfile {
 		this.email = email;
 		this.password = password;
 		this.beginningBalance = new BigDecimal(beginningBalance);
-		
+		this.balance = new BigDecimal(this.beginningBalance.toString());
+		this.ownedShares = new ArrayList<>();
+		this.transactions = new ArrayList<>();
 	}
 	
 	/**

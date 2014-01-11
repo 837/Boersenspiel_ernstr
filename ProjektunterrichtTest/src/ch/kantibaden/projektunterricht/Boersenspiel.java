@@ -30,7 +30,7 @@ public class Boersenspiel extends Application {
 		
 		//macht die Stage sichtbar
 		primaryStage.show();
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
 		
 	}
 	
