@@ -89,8 +89,12 @@ public class PlayerProfile {
 	/**
 	 * @return the ownedShares
 	 */
-	public ArrayList<ShareContainer> getOwnedShares() {
-		return ownedShares;
+	public ArrayList<Share> getOwnedShares() {
+		ArrayList<Share> shares = new ArrayList<>();
+		for (ShareContainer currentShare : ownedShares){
+			shares.add(currentShare.getShare());
+		}
+		return shares;
 	}
 	
 	/**

@@ -30,11 +30,15 @@ public class ShareManager {
 		while ((line = bufferedCSV.readLine()) != null) {
 			System.out.println(line);
 			String[] splittedLine = line.split(",");
-			try {
+			
+			if(splittedLine.length==4){//name contains ','
+				shares.add(new Share(splittedLine[2]+splittedLine[3], splittedLine[1], new BigDecimal(splittedLine[0])));
+			}else if(splittedLine.length==3){//normal case
 				shares.add(new Share(splittedLine[2], splittedLine[1], new BigDecimal(splittedLine[0])));
-			} catch (Exception e) {
-				System.out.println("failed adding " + line + " : " + e);
+			}else{
+				System.out.println("Weird Yahoo input: \"" + line + "\"");
 			}
+			
 		}
 		
 		for (Share currentShare : shares) {
