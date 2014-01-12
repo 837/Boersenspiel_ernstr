@@ -93,29 +93,12 @@ public class Controller {
 		
 		// adding an eventListener for tvMeineAktien, used to select "selected".
 		tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> 969750248e22f49c6f490bad3247962a40d1e235
 			@Override
 			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
 				// Check whether item is selected and set value of selected item
 				// to Label
-<<<<<<< HEAD
-				if (tvAlleAktien.getSelectionModel().getSelectedItem() != null) {
-					selectedShare = (Share) newValue;
 
-					/*lblDetailSymbol.setText("Symbol: " + selectedShare.getSymbol());
-					lblDetailName.setText("Name: " + selectedShare.getName());
-					lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
-					lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedSharesByShare(selectedShare));*/
-
-				}
-			}
-		});
-
-=======
 				if (tvMeineAktien.getSelectionModel().getSelectedItem() != null) {
 					selectedShare =  newValue;
 					
@@ -126,8 +109,7 @@ public class Controller {
 				}
 			}
 		});
-		
->>>>>>> 969750248e22f49c6f490bad3247962a40d1e235
+
 		// kaufenButton Listener
 		btKaufen.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

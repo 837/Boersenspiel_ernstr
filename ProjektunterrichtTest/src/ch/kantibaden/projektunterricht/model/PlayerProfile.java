@@ -136,25 +136,14 @@ public class PlayerProfile {
 	
 	public boolean sell(Share shareToSell, int amount) {
 		boolean couldSell = false;
-<<<<<<< HEAD
-		int actuallySoldAmount = 0;
 
-		for (ShareContainer currentShareContainer : getOwnedShares()) {
-
-			if (currentShareContainer.getShare() == shareToSell) {// this works because
-															// they reference
-															// the same object
-				actuallySoldAmount = currentShareContainer.sell(amount);// could sell
-																// that many
-																// shares?
-=======
 		int actuallAmount = 0;
 		
 		for (ShareContainer currentShareContainer : getOwnedShares()) {
 			
 			if (currentShareContainer.getShare() == shareToSell) {
 				actuallAmount = currentShareContainer.sell(amount);
->>>>>>> 969750248e22f49c6f490bad3247962a40d1e235
+
 				couldSell = true;
 				if (currentShareContainer.isEmpty()) {
 					ownedShares.remove(currentShareContainer);
