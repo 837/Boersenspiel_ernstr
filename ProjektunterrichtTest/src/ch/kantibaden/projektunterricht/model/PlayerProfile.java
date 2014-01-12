@@ -81,7 +81,6 @@ public class PlayerProfile {
 		
 		for (ShareContainer currentShare : ownedShares) {
 			totalValue = totalValue.add(currentShare.getShare().getValue().multiply(new BigDecimal(currentShare.getAmount())));
-			
 		}
 		
 		return totalValue;
@@ -100,7 +99,6 @@ public class PlayerProfile {
 	public int getOwnedSharesByShare(Share share) {
 		for (ShareContainer currentShare : ownedShares) {
 			if (currentShare.getShare().equals(share)) {
-				
 				return currentShare.getAmount();
 			}
 		}
@@ -115,30 +113,19 @@ public class PlayerProfile {
 	}
 	
 	public boolean buy(Share shareToBuy, int amount) {
-		if (shareToBuy.getValue().multiply(new BigDecimal(amount)).compareTo(getBalance()) == 1) {// don't
-																									// have
-																									// enough
-																									// money
+		if (shareToBuy.getValue().multiply(new BigDecimal(amount)).compareTo(getBalance()) == 1) {
 			System.out.println("Sorry not enough money! You would need: " + shareToBuy.getValue().multiply(new BigDecimal(amount)));
 			return false;
 		}
 		
 		System.out.println(getBalance());
-		// getBalance().subtract(shareToBuy.getValue().multiply(new
-		// BigDecimal(amount))); //DAS GAHT NED,
-		this.balance = getBalance().subtract(shareToBuy.getValue().multiply(new BigDecimal(amount))); // HINGEGE
-																										// DAS
-																										// GAHT
-																										// 0.o
+		this.balance = getBalance().subtract(shareToBuy.getValue().multiply(new BigDecimal(amount))); 
 		System.out.println(getBalance());
-		
 		transactions.add(new Transaction(shareToBuy, amount));
-		System.out.println("Just bought: " + shareToBuy.getName() + "  " + shareToBuy.getValue().multiply(new BigDecimal(amount)));
+		System.out.println("Just bought: " +amount+" "+ shareToBuy.getName() + "  " + shareToBuy.getValue().multiply(new BigDecimal(amount)));
 		
 		for (ShareContainer currentShare : ownedShares) {
-			if (currentShare.getShare() == shareToBuy) {// this works because it
-														// actually is the same
-														// object
+			if (currentShare.getShare() == shareToBuy) {
 				currentShare.buy(amount);
 				return true;
 			}
@@ -147,22 +134,17 @@ public class PlayerProfile {
 		return true;
 	}
 	
-	/* HIER STIMMT ETWAS NOCH NICHT, ES GIBT IMMER TRUE ZURÜCK */
 	public boolean sell(Share shareToSell, int amount) {
 		boolean couldSell = false;
-		int actuallySoldAmount = 0;
+		int actuallAmount = 0;
 		
-		for (ShareContainer currentShare : getOwnedShares()) {
+		for (ShareContainer currentShareContainer : getOwnedShares()) {
 			
-			if (currentShare.getShare() == shareToSell) {// this works because
-															// they reference
-															// the same object
-				actuallySoldAmount = currentShare.sell(amount);// could sell
-																// that many
-																// shares?
+			if (currentShareContainer.getShare() == shareToSell) {
+				actuallAmount = currentShareContainer.sell(amount);
 				couldSell = true;
-				if (currentShare.isEmpty()) {
-					ownedShares.remove(shareToSell);
+				if (currentShareContainer.isEmpty()) {
+					ownedShares.remove(currentShareContainer);
 				}
 				break;
 			}
@@ -170,16 +152,10 @@ public class PlayerProfile {
 		
 		if (couldSell) {
 			System.out.println(getBalance());
-			// balance.add(shareToSell.getValue().multiply(new
-			// BigDecimal(actuallySoldAmount))); THIS DOES NOT WORKS
-			
-			this.balance = getBalance().add(shareToSell.getValue().multiply(new BigDecimal(actuallySoldAmount))); // THIS
-																													// DOES
+			this.balance = getBalance().add(shareToSell.getValue().multiply(new BigDecimal(actuallAmount)));
 			System.out.println(getBalance());
-			
-			transactions.add(new Transaction(shareToSell, -actuallySoldAmount));
-			
-			System.out.println("Just sold: " + shareToSell.getName() + "  " + shareToSell.getValue().multiply(new BigDecimal(amount)));
+			transactions.add(new Transaction(shareToSell, -actuallAmount));
+			System.out.println("Just sold: " +actuallAmount+" "+ shareToSell.getName() + "  " + shareToSell.getValue().multiply(new BigDecimal(amount)));
 			
 		}
 		return couldSell;
