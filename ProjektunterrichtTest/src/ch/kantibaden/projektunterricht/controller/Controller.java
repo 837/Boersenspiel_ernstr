@@ -36,7 +36,7 @@ public class Controller {
 		// login here
 
 		player = new PlayerProfile("username_here", "email_here", "password_here", 20000);
-		shares = new ShareManager();
+		shares = new ShareManager(player.getOwnedShares());
 
 		// sagt den Zellen nach welchem Wert sie in der Aktie schauen müssen.
 		// AlleAktien
@@ -162,7 +162,11 @@ public class Controller {
 		btRefresh.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				shares.refreshAll();
+				try {
+					shares.downloadAll();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
