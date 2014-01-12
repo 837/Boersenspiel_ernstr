@@ -95,24 +95,24 @@ public class Controller {
 		});
 
 		// adding an eventListener for tvMeineAktien, used to select "selected".
-				tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
+		tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
 
-					@Override
-					public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
-						// Check whether item is selected and set value of selected item
-						// to Label
-						if (tvAlleAktien.getSelectionModel().getSelectedItem() != null) {
-							selectedShare = (Share) newValue;
+			@Override
+			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
+				// Check whether item is selected and set value of selected item
+				// to Label
+				if (tvAlleAktien.getSelectionModel().getSelectedItem() != null) {
+					selectedShare = (Share) newValue;
 
-							lblDetailSymbol.setText("Symbol: " + selectedShare.getSymbol());
-							lblDetailName.setText("Name: " + selectedShare.getName());
-							lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
-							lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedSharesByShare(selectedShare));
+					/*lblDetailSymbol.setText("Symbol: " + selectedShare.getSymbol());
+					lblDetailName.setText("Name: " + selectedShare.getName());
+					lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
+					lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedSharesByShare(selectedShare));*/
 
-						}
-					}
-				});
-		
+				}
+			}
+		});
+
 		// kaufenButton Listener
 		btKaufen.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -130,10 +130,9 @@ public class Controller {
 					txtAmount.setText("");
 
 					// befüllt meineAktien tabelle
+					tvMeineAktien.getItems().clear();
 					for (ShareContainer currentShare : player.getOwnedShares()) {
-						tvMeineAktien.getItems().clear();
 						tvMeineAktien.getItems().addAll(currentShare.getShare());
-						//ZEIGT IMMER NUR DIE NEUSTE AN, BIN ZU MÜEDE UM ES NOCH HEUTE ZU MACHEN
 					}
 				}
 			}
@@ -156,10 +155,9 @@ public class Controller {
 					txtAmount.setText("");
 
 					// befüllt meineAktien tabelle
+					tvMeineAktien.getItems().clear();
 					for (ShareContainer currentShare : player.getOwnedShares()) {
-						tvMeineAktien.getItems().clear();
 						tvMeineAktien.getItems().addAll(currentShare.getShare());
-						//ZEIGT IMMER NUR DIE NEUSTE AN, BIN ZU MÜEDE UM ES NOCH HEUTE ZU MACHEN
 					}
 				}
 			}
