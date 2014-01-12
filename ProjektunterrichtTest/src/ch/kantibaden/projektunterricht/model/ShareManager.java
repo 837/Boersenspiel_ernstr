@@ -46,10 +46,6 @@ public class ShareManager {
 			System.out.println(currentShare.getName() + "  " + currentShare.getSymbol() + "  " + currentShare.getValue());
 		}
 		
-		// DOWNLOAD FOR EACH SHARE THE CHART
-		for (Share currentShare : shares) {
-			//currentShare.downloadImage();
-		}
 	}
 	
 	public ArrayList<Share> getShares() {
