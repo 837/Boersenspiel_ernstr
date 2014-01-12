@@ -26,7 +26,7 @@ public class ShareContainer {
 	}
 	
 	public int sell(int amount) {
-		if (this.amount > amount) {
+		if (this.amount < amount) {
 			int actualAmount = this.amount;
 			setAmount(-actualAmount);
 			return actualAmount;

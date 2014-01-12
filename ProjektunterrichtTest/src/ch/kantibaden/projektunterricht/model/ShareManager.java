@@ -28,6 +28,7 @@ public class ShareManager {
 		
 		String line;
 		while ((line = bufferedCSV.readLine()) != null) {
+			line = line.replaceAll("\"", "");
 			System.out.println(line);
 			String[] splittedLine = line.split(",");
 			
