@@ -1,11 +1,7 @@
 package ch.kantibaden.projektunterricht.model;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -18,6 +14,17 @@ public class ShareManager {
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
 
 	public ShareManager(ArrayList<ShareContainer> playerShares) throws IOException {
+		for (ShareContainer currentShareContainer : playerShares) {
+			shares.add(currentShareContainer.getShare());
+		}
+		downloadAll();
+	}
+	
+	public ShareManager(){
+		
+	}
+	
+	public void loadPlayerShares(ArrayList<ShareContainer> playerShares) throws IOException {
 		for (ShareContainer currentShareContainer : playerShares) {
 			shares.add(currentShareContainer.getShare());
 		}

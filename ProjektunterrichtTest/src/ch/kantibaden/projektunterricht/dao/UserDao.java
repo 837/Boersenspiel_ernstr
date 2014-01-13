@@ -89,6 +89,9 @@ public class UserDao {
 		} finally {
 			db.close();
 		}
+		if(signup){
+			login(name, password);
+		}
 		return signup;
 	}
 
