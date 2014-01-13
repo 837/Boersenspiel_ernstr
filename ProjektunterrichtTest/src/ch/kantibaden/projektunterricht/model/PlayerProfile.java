@@ -7,16 +7,14 @@ import java.util.Iterator;
 public class PlayerProfile {
 	
 	private String name;
-	private String email;
 	private String password;
 	private BigDecimal beginningBalance;
 	private BigDecimal balance;
 	private ArrayList<ShareContainer> ownedShares;
 	private ArrayList<Transaction> transactions;
 	
-	public PlayerProfile(String name, String email, String password, int beginningBalance) {
+	public PlayerProfile(String name, String password, int beginningBalance) {
 		this.name = name;
-		this.email = email;
 		this.password = password;
 		this.beginningBalance = new BigDecimal(beginningBalance);
 		this.balance = new BigDecimal(this.beginningBalance.toString());
@@ -39,20 +37,6 @@ public class PlayerProfile {
 		this.name = name;
 	}
 	
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-	
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
 	/**
 	 * @return the password

@@ -1,9 +1,6 @@
 package ch.kantibaden.projektunterricht.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-
-import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -11,12 +8,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import ch.kantibaden.projektunterricht.dao.UserDao;
 import ch.kantibaden.projektunterricht.model.PlayerProfile;
 import ch.kantibaden.projektunterricht.model.Share;
 import ch.kantibaden.projektunterricht.model.ShareContainer;
@@ -35,9 +33,11 @@ public class Controller {
 	private void initialize() throws IOException {
 		// login here
 
-		player = new PlayerProfile("username_here", "email_here", "password_here", 20000);
+		player = UserDao.getUser();
 		shares = new ShareManager(player.getOwnedShares());
 
+		
+		
 		// sagt den Zellen nach welchem Wert sie in der Aktie schauen müssen.
 		// AlleAktien
 		aaSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
@@ -129,6 +129,7 @@ public class Controller {
 					for (ShareContainer currentShare : player.getOwnedShares()) {
 						tvMeineAktien.getItems().addAll(currentShare.getShare());
 					}
+					UserDao.saveUser(player);
 				}
 			}
 		});
@@ -154,6 +155,7 @@ public class Controller {
 					for (ShareContainer currentShare : player.getOwnedShares()) {
 						tvMeineAktien.getItems().addAll(currentShare.getShare());
 					}
+					UserDao.saveUser(player);
 				}
 			}
 		});
@@ -164,8 +166,12 @@ public class Controller {
 			public void handle(ActionEvent arg0) {
 				try {
 					shares.downloadAll();
+					btRefresh.setText("Aktualisiere Aktien");
+					btRefresh.setTextFill(Color.GREEN);
 				} catch (IOException e) {
 					e.printStackTrace();
+					btRefresh.setText("No connection, click again");
+					btRefresh.setTextFill(Color.RED);
 				}
 			}
 		});

@@ -13,26 +13,28 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class ShareManager {
-	
+
 	private ArrayList<Share> shares = new ArrayList<Share>();
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
-	
+
 	public ShareManager(ArrayList<ShareContainer> playerShares) throws IOException {
 		for (ShareContainer currentShareContainer : playerShares) {
 			shares.add(currentShareContainer.getShare());
 		}
 		downloadAll();
 	}
-	
+
 	public void downloadAll() throws IOException {
 		// download all shares
 		String downloadLink = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES + "&f=l1s0n0&e=.csv";
 		System.out.println(downloadLink);
 		URL url = new URL(downloadLink);
 		URLConnection connection = url.openConnection();
+		connection.setConnectTimeout(2000);// timeout after 2sec
+		connection.setReadTimeout(2000);
 		connection.connect();
 		BufferedReader bufferedCSV = new BufferedReader(new InputStreamReader(url.openStream()));
-		
+
 		String line;
 		while ((line = bufferedCSV.readLine()) != null) {
 			line = line.replaceAll("\"", "");
@@ -46,7 +48,7 @@ public class ShareManager {
 						foundShare = true;
 					}
 				}
-				
+
 				if (!foundShare) {
 					if (splittedLine.length == 4) {// name contains ','
 						shares.add(new Share(splittedLine[2] + splittedLine[3], splittedLine[1], new BigDecimal(splittedLine[0])));
@@ -58,14 +60,14 @@ public class ShareManager {
 				}
 			}
 		}
-		
+
 		for (Share currentShare : shares) {
 			System.out.println(currentShare.getName() + "  " + currentShare.getSymbol() + "  " + currentShare.getValue());
 		}
 	}
-	
+
 	public ArrayList<Share> getShares() {
 		return shares;
 	}
-	
+
 }

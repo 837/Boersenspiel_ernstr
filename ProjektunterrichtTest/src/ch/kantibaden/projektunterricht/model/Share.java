@@ -51,6 +51,7 @@ public class Share {
 				String downloadLink = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol.get() + "&f=l1&e=.csv";
 				URL url = new URL(downloadLink);
 				URLConnection connection = url.openConnection();
+				connection.setConnectTimeout(2500);//timeout after 2,5sec
 				connection.connect();
 				BufferedReader bufferedCSV = new BufferedReader(new InputStreamReader(url.openStream()));
 				
