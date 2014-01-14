@@ -65,6 +65,11 @@ public class Share {
 		}
 	}
 	
+	public String getImagePath(){
+		return "http://chart.finance.yahoo.com/z?s=" + symbol.get().replaceAll("\"", "")
+				+ "&t=2m&q=l&l=on&z=l&p=m20,m50,m200";
+	}
+	
 	public void downloadImage() {
 		try {
 			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + symbol.get().replaceAll("\"", "")

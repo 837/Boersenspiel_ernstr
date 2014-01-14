@@ -13,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import ch.kantibaden.projektunterricht.Boersenspiel;
@@ -90,7 +92,7 @@ public class Controller {
 				// Check whether item is selected and set value of selected item to Label
 				if (tvAlleAktien.getSelectionModel().getSelectedItem() != null) {
 					selectedShare = (Share) newValue;
-					updateDetailLabels();
+					updateDetails();
 				}
 			}
 			
@@ -104,7 +106,7 @@ public class Controller {
 				// Check whether item is selected and set value of selected item to Label
 				if (tvMeineAktien.getSelectionModel().getSelectedItem() != null) {
 					selectedShare = newValue;
-					updateDetailLabels();
+					updateDetails();
 				}
 			}
 			
@@ -143,12 +145,21 @@ public class Controller {
 		}
 	}
 	
-	private void updateDetailLabels() {
+	@FXML
+	void handleChart() {
+		if (selectedShare != null) {
+			imgChart.setImage(new Image(selectedShare.getImagePath()));
+			imgChart.setVisible(true);
+		}
+	}
+	
+	private void updateDetails() {
 		lblDetailSymbol.setText("Symbol: " + selectedShare.getSymbol());
 		lblDetailName.setText("Name: " + selectedShare.getName());
 		lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
 		lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedAmountOfShare(selectedShare));
 		lblDetailTotalerWert.setText("Totaler Wert: " + player.getTotalValueOfShare(selectedShare).toString());
+		imgChart.setVisible(false);
 	}
 	
 	private void buySellActions() {
@@ -194,6 +205,8 @@ public class Controller {
 	@FXML private Label lblDetailTotalerWert;
 	@FXML private Button btKaufen;
 	@FXML private Button btVerkaufen;
+	@FXML private Button btChart;
 	@FXML private TextField txtAmount;
+	@FXML private ImageView imgChart;
 	
 }

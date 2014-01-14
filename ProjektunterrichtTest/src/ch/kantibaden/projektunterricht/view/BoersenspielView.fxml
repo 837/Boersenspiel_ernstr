@@ -2,13 +2,14 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="645.0" prefWidth="789.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ch.kantibaden.projektunterricht.controller.Controller">
   <children>
     <BorderPane prefHeight="399.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
-        <SplitPane dividerPositions="0.5057179161372299" focusTraversable="true" prefHeight="367.0" prefWidth="520.0">
+        <SplitPane dividerPositions="0.30749682337992373" focusTraversable="true" prefHeight="367.0" prefWidth="520.0">
           <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <children>
@@ -16,7 +17,7 @@
                   <tabs>
                     <Tab text="Home">
                       <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="355.0">
                           <children>
                             <Label fx:id="lblStartkapital" layoutY="38.0" text="Startkapital: " AnchorPane.leftAnchor="14.0" />
                             <Label fx:id="lblMomentanesKapital" layoutY="62.0" text="Momentanes Kapital: " AnchorPane.leftAnchor="14.0" />
@@ -60,7 +61,7 @@
                   <tabs>
                     <Tab text="Details Aktie">
                       <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="587.0">
                           <children>
                             <Button fx:id="btKaufen" layoutX="92.0" mnemonicParsing="false" onAction="#handleBuy" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
                             <Button fx:id="btVerkaufen" layoutX="174.0" mnemonicParsing="false" onAction="#handleSell" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
@@ -70,6 +71,8 @@
                             <Label fx:id="lblDetailKurs" layoutX="14.0048828125" layoutY="64.5" text="Kurs: " />
                             <Label fx:id="lblDetailAnzahl" layoutX="14.0" layoutY="88.0" text="Anzahl die ich besitze: " />
                             <Label fx:id="lblDetailTotalerWert" layoutX="13.0" layoutY="111.0" text="Totaler Wert:" />
+                            <Button fx:id="btChart" mnemonicParsing="false" onAction="#handleChart" prefWidth="141.0" text="Chart anzeigen" AnchorPane.bottomAnchor="135.0" AnchorPane.rightAnchor="8.0" />
+                            <ImageView fx:id="imgChart" fitHeight="267.5" fitWidth="518.0" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="144.5" />
                           </children>
                         </AnchorPane>
                       </content>
