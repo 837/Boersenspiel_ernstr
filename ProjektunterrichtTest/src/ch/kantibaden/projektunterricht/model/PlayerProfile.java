@@ -2,7 +2,6 @@ package ch.kantibaden.projektunterricht.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class PlayerProfile {
 	

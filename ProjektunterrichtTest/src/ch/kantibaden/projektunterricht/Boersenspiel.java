@@ -22,25 +22,22 @@ public class Boersenspiel extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Börsenspiel");
 		this.primaryStage = primaryStage;
-	
-		//main app
+		
 		try {
 			// loads the fxml
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/BoersenspielView.fxml"));
 			root = (Parent) loader.load();
 			Scene mainScene = new Scene(root);
 			primaryStage.setScene(mainScene);
-			// macht die Stage sichtbar
 			
 			primaryStage.setResizable(true);
 			Controller c =  loader.getController();
 			c.setBoersenspiel(this);
-			//c.setStage(primaryStage);
 			c.login();
 			primaryStage.show();
 			
 		} catch (IOException e) {
-			System.out.println(e.getMessage());//"Wenn hier ein Fehler ist, dann liegt es wahrscheinlich an der Bennenung eines ViewObjektes. (fx:id)");
+			System.out.println(e.getMessage());
 		}
 		
 	}
@@ -57,13 +54,11 @@ public class Boersenspiel extends Application {
 			Scene scene = new Scene(pane);
 			dialogStage.setScene(scene);
 			
-			
 			LoginController controller = loader.getController();
 			controller.setStage(dialogStage);
 			controller.setPlayerShares(player, shares);
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
-			
 			
 		} catch (IOException e) {
 			// Exception gets thrown if the fxml file could not be loaded
