@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import ch.kantibaden.projektunterricht.controller.Controller;
 import ch.kantibaden.projektunterricht.controller.LoginController;
+import ch.kantibaden.projektunterricht.model.PlayerProfile;
+import ch.kantibaden.projektunterricht.model.ShareManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,7 +44,7 @@ public class Boersenspiel extends Application {
 		
 	}
 	
-	public void login(){
+	public void login(PlayerProfile player, ShareManager shares){
 		try {
 			// Load the fxml file and create a new stage for the popup
 			FXMLLoader loader = new FXMLLoader(Boersenspiel.class.getResource("view/LoginView.fxml"));
@@ -57,7 +59,7 @@ public class Boersenspiel extends Application {
 			
 			LoginController controller = loader.getController();
 			controller.setStage(dialogStage);
-			
+			controller.setPlayerShares(player, shares);
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
 			

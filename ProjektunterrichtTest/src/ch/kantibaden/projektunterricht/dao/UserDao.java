@@ -78,7 +78,8 @@ public class UserDao {
 			} else {
 
 				db.store(new PlayerProfile(name, password, Integer.parseInt(startkapital)));
-
+				user = new PlayerProfile(name, password, Integer.parseInt(startkapital));
+			    db.store(user);
 				System.out.println("signed up");
 				signup = true;
 			}
@@ -88,9 +89,6 @@ public class UserDao {
 			signup = false;
 		} finally {
 			db.close();
-		}
-		if(signup){
-			login(name, password);
 		}
 		return signup;
 	}

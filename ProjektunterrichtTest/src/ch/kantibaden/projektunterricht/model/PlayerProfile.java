@@ -37,7 +37,6 @@ public class PlayerProfile {
 		this.name = name;
 	}
 	
-	
 	/**
 	 * @return the password
 	 */
@@ -80,13 +79,22 @@ public class PlayerProfile {
 	/**
 	 * @return the ownedSharesByShare
 	 */
-	public int getOwnedSharesByShare(Share share) {
+	public int getOwnedAmountOfShare(Share share) {
 		for (ShareContainer currentShare : ownedShares) {
-			if (currentShare.getShare().equals(share)) {
+			if (currentShare.getShare()==share) {
 				return currentShare.getAmount();
 			}
 		}
 		return 0;
+	}
+	
+	public BigDecimal getTotalValueOfShare(Share share) {
+		for (ShareContainer currentShare : ownedShares) {
+			if (currentShare.getShare()==share) {
+				return currentShare.getShare().getValue().multiply(new BigDecimal(currentShare.getAmount()));
+			}
+		}
+		return new BigDecimal(0);
 	}
 	
 	/**
@@ -103,10 +111,11 @@ public class PlayerProfile {
 		}
 		
 		System.out.println(getBalance());
-		this.balance = getBalance().subtract(shareToBuy.getValue().multiply(new BigDecimal(amount))); 
+		this.balance = getBalance().subtract(shareToBuy.getValue().multiply(new BigDecimal(amount)));
 		System.out.println(getBalance());
 		transactions.add(new Transaction(shareToBuy, amount));
-		System.out.println("Just bought: " +amount+" "+ shareToBuy.getName() + "  " + shareToBuy.getValue().multiply(new BigDecimal(amount)));
+		System.out.println("Just bought: " + amount + " " + shareToBuy.getName() + "  "
+				+ shareToBuy.getValue().multiply(new BigDecimal(amount)));
 		
 		for (ShareContainer currentShare : ownedShares) {
 			if (currentShare.getShare() == shareToBuy) {
@@ -120,14 +129,14 @@ public class PlayerProfile {
 	
 	public boolean sell(Share shareToSell, int amount) {
 		boolean couldSell = false;
-
+		
 		int actuallAmount = 0;
 		
 		for (ShareContainer currentShareContainer : getOwnedShares()) {
 			
 			if (currentShareContainer.getShare() == shareToSell) {
 				actuallAmount = currentShareContainer.sell(amount);
-
+				
 				couldSell = true;
 				if (currentShareContainer.isEmpty()) {
 					ownedShares.remove(currentShareContainer);
@@ -141,7 +150,8 @@ public class PlayerProfile {
 			this.balance = getBalance().add(shareToSell.getValue().multiply(new BigDecimal(actuallAmount)));
 			System.out.println(getBalance());
 			transactions.add(new Transaction(shareToSell, -actuallAmount));
-			System.out.println("Just sold: " +actuallAmount+" "+ shareToSell.getName() + "  " + shareToSell.getValue().multiply(new BigDecimal(amount)));
+			System.out.println("Just sold: " + actuallAmount + " " + shareToSell.getName() + "  "
+					+ shareToSell.getValue().multiply(new BigDecimal(amount)));
 			
 		}
 		return couldSell;
