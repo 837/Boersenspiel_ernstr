@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class Boersenspiel extends Application {
 	Parent root = null;
 	private Stage primaryStage;
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Börsenspiel");

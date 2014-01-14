@@ -81,14 +81,6 @@
           </items>
         </SplitPane>
       </center>
-      <top>
-        <MenuBar>
-          <menus>
-            <Menu mnemonicParsing="false" text="Profil" fx:id="mProfil" />
-            <Menu mnemonicParsing="false" text="Logout" fx:id="mLogout" />
-          </menus>
-        </MenuBar>
-      </top>
     </BorderPane>
   </children>
 </AnchorPane>
