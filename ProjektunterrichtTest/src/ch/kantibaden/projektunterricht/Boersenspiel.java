@@ -32,6 +32,7 @@ public class Boersenspiel extends Application {
 			
 			primaryStage.setResizable(true);
 			Controller c =  loader.getController();
+			c.setStage(primaryStage);
 			c.setBoersenspiel(this);
 			c.login();
 			primaryStage.show();

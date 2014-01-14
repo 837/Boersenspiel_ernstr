@@ -49,6 +49,7 @@ public class LoginController {
 	
 	@FXML
 	private void handleLogin() {
+		lbInfoLogin.setText("");
 		if (txtUsernameLogin.getText().isEmpty() || pwPasswordLogin.getText().isEmpty()) {
 			lbInfoLogin.setText("Username und Passwort müssen ausgefüllt sein.");
 		} else if (!UserDao.login(txtUsernameLogin.getText(), pwPasswordLogin.getText())) {
@@ -66,6 +67,7 @@ public class LoginController {
 	
 	@FXML
 	private void handleSignup() {
+		lbInfoSignup.setText("");
 		if (txtUsernameSignup.getText().isEmpty() || pwPasswordSignup.getText().isEmpty() || txtStartkapital.getText().isEmpty()) {
 			lbInfoSignup.setText("Alle drei Felder müssen ausgefüllt sein.");
 		} else if (!UserDao.signup(txtUsernameSignup.getText(), pwPasswordSignup.getText(), txtStartkapital.getText())) {

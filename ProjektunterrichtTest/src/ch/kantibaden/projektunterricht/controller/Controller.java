@@ -16,7 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import ch.kantibaden.projektunterricht.Boersenspiel;
 import ch.kantibaden.projektunterricht.dao.UserDao;
 import ch.kantibaden.projektunterricht.model.PlayerProfile;
@@ -26,6 +29,7 @@ import ch.kantibaden.projektunterricht.model.ShareManager;
 
 public class Controller {
 	
+	private Stage stage;
 	private Boersenspiel boersenspiel;
 	private PlayerProfile player = null;
 	private ShareManager shares;
@@ -36,6 +40,10 @@ public class Controller {
 	
 	public void setBoersenspiel(Boersenspiel b) {
 		this.boersenspiel = b;
+	}
+	
+	public void setStage(Stage stage){
+		this.stage = stage;
 	}
 	
 	public void login() throws Exception {
@@ -53,6 +61,11 @@ public class Controller {
 			lblMomentanesKapital.setText(MOMENTANES_KAPITAL + " " + player.getBalance().toString() + " CHF");
 			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 			lblBenutzername.setText("Benutzername: " + player.getName());
+			
+			imgChart.setPreserveRatio(true);
+			imgChart.fitWidthProperty().bind(stage.widthProperty());
+			//imgChart.fitHeightProperty().bind(stage.heightProperty());
+			bpChart.setCenter(imgChart);
 		}
 	}
 	
@@ -208,5 +221,6 @@ public class Controller {
 	@FXML private Button btChart;
 	@FXML private TextField txtAmount;
 	@FXML private ImageView imgChart;
+	@FXML private BorderPane bpChart;
 	
 }
