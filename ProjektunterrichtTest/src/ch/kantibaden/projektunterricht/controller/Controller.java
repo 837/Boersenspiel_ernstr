@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -137,7 +138,7 @@ public class Controller {
 			if (player.buy(selectedShare, amount)) {
 				buySellActions();
 				lbTransactionInfo.setText("Gekauft: " + amount + " * " + selectedShare.getName() + "  "
-						+ selectedShare.getValue().multiply(new BigDecimal(amount))+" CHF");
+						+ selectedShare.getValue().multiply(new BigDecimal(amount)) + " CHF");
 				lbTransactionInfo.setTextFill(Color.GREEN);
 
 			} else {
@@ -157,7 +158,7 @@ public class Controller {
 			if (actuallAmount > 0) {
 				buySellActions();
 				lbTransactionInfo.setText("Verkauft: " + actuallAmount + " * " + selectedShare.getName() + "  "
-						+ selectedShare.getValue().multiply(new BigDecimal(actuallAmount))+" CHF");
+						+ selectedShare.getValue().multiply(new BigDecimal(actuallAmount)) + " CHF");
 				lbTransactionInfo.setTextFill(Color.GREEN);
 
 			} else {
@@ -175,17 +176,9 @@ public class Controller {
 			btRefresh.setTextFill(Color.GREEN);
 			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			btRefresh.setText("Keine Verbindung, erneut versuchen");
 			btRefresh.setTextFill(Color.RED);
-		}
-	}
-
-	@FXML
-	void handleChart() {
-		if (selectedShare != null) {
-			imgChart.setImage(new Image(selectedShare.getImagePath()));
-			imgChart.setVisible(true);
 		}
 	}
 

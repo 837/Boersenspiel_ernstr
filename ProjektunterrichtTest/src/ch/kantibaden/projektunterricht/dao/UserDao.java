@@ -32,13 +32,13 @@ public class UserDao {
 			query.constrain(PlayerProfile.class);
 			query.descend("name").constrain(username);
 			ObjectSet<PlayerProfile> result = query.execute();
-			System.out.println("login: " + result.next().getName());
+			
 			if (result.hasNext()) // found
 			{
 				// Search for user with pw
 				query.descend("password").constrain(password);
 				ObjectSet<PlayerProfile> resultWithPw = query.execute();
-				System.out.println("login pw : " + resultWithPw.next().getPassword());
+				
 				if (resultWithPw.hasNext()) // found
 				{
 					setUser(resultWithPw.next());

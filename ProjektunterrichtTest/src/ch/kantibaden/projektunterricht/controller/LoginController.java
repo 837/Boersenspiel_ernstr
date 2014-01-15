@@ -5,7 +5,7 @@ import java.io.IOException;
 import ch.kantibaden.projektunterricht.dao.UserDao;
 import ch.kantibaden.projektunterricht.model.PlayerProfile;
 import ch.kantibaden.projektunterricht.model.ShareManager;
-
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,20 +19,28 @@ public class LoginController {
 	private Stage dialogStage;
 	private PlayerProfile player;
 	private ShareManager shares;
-	
+
 	public void setStage(Stage stage) {
 		this.dialogStage = stage;
 	}
-	
+
 	public void setPlayerShares(PlayerProfile player, ShareManager shares) {
 		this.player = player;
 		this.shares = shares;
 	}
-	
+
 	@FXML
 	private void initialize() {
 		lbInfoLogin.setTextFill(Color.RED);
 		lbInfoSignup.setTextFill(Color.RED);
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				txtUsernameLogin.requestFocus();
+			}
+		});
+
 		txtStartkapital.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent inputevent) {
@@ -46,7 +54,7 @@ public class LoginController {
 			}
 		});
 	}
-	
+
 	@FXML
 	private void handleLogin() {
 		lbInfoLogin.setText("");
@@ -64,7 +72,7 @@ public class LoginController {
 			}
 		}
 	}
-	
+
 	@FXML
 	private void handleSignup() {
 		lbInfoSignup.setText("");
@@ -82,12 +90,19 @@ public class LoginController {
 			}
 		}
 	}
-	
-	@FXML private TextField txtUsernameLogin;
-	@FXML private TextField txtUsernameSignup;
-	@FXML private TextField txtStartkapital;
-	@FXML private Label lbInfoLogin;
-	@FXML private Label lbInfoSignup;
-	@FXML private PasswordField pwPasswordLogin;
-	@FXML private PasswordField pwPasswordSignup;
+
+	@FXML
+	private TextField txtUsernameLogin;
+	@FXML
+	private TextField txtUsernameSignup;
+	@FXML
+	private TextField txtStartkapital;
+	@FXML
+	private Label lbInfoLogin;
+	@FXML
+	private Label lbInfoSignup;
+	@FXML
+	private PasswordField pwPasswordLogin;
+	@FXML
+	private PasswordField pwPasswordSignup;
 }
