@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.kantibaden.projektunterricht.controller.Controller">
+<AnchorPane prefHeight="600.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ch.kantibaden.projektunterricht.controller.Controller">
   <children>
     <BorderPane prefHeight="399.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
@@ -25,9 +25,9 @@
                             <Label fx:id="" text="Meine Aktien" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="127.0" />
                             <TableView fx:id="tvMeineAktien" focusTraversable="true" prefHeight="396.0" prefWidth="375.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="156.0">
                               <columns>
-                                <TableColumn fx:id="maSymbol" prefWidth="100.0" text="Symbol" />
-                                <TableColumn fx:id="maName" prefWidth="150.0" text="Name" />
-                                <TableColumn fx:id="maKurs" maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" />
+                                <TableColumn prefWidth="100.0" text="Symbol" fx:id="maSymbol" />
+                                <TableColumn prefWidth="150.0" text="Name" fx:id="maName" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" fx:id="maKurs" />
                               </columns>
                             </TableView>
                             <Label fx:id="lblBenutzername" layoutX="14.0" layoutY="14.0" text="Benutzername:" />
@@ -41,9 +41,9 @@
                           <children>
                             <TableView id="tvMeineAktien" fx:id="tvAlleAktien" focusTraversable="true" prefHeight="505.0" prefWidth="375.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                               <columns>
-                                <TableColumn fx:id="aaSymbol" prefWidth="100.0" text="Symbol" />
-                                <TableColumn fx:id="aaName" prefWidth="150.0" text="Name" />
-                                <TableColumn fx:id="aaKurs" maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" />
+                                <TableColumn prefWidth="100.0" text="Symbol" fx:id="aaSymbol" />
+                                <TableColumn prefWidth="150.0" text="Name" fx:id="aaName" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" fx:id="aaKurs" />
                               </columns>
                             </TableView>
                           </children>
@@ -62,10 +62,10 @@
                       <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                            <Button fx:id="btKaufen" layoutX="100.0" layoutY="715.0" mnemonicParsing="false" onAction="#handleBuy" prefHeight="40.0" prefWidth="70.0" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
-                            <Button fx:id="btVerkaufen" layoutX="187.0" layoutY="713.0" mnemonicParsing="false" onAction="#handleSell" prefHeight="40.0" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
-                            <Button fx:id="btRefresh" layoutX="274.0" layoutY="513.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="40.0" prefWidth="315.0" text="Aktualisiere Aktien" AnchorPane.bottomAnchor="16.0" />
-                            <TextField fx:id="txtAmount" layoutX="13.0" layoutY="713.0" prefHeight="40.0" prefWidth="70.0" AnchorPane.bottomAnchor="16.0" />
+                            <Button fx:id="btKaufen" layoutX="100.0" mnemonicParsing="false" onAction="#handleBuy" prefHeight="40.0" prefWidth="70.0" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
+                            <Button fx:id="btVerkaufen" layoutX="187.0" mnemonicParsing="false" onAction="#handleSell" prefHeight="40.0" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
+                            <Button fx:id="btRefresh" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="40.0" prefWidth="315.0" text="Aktualisiere Aktien" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+                            <TextField fx:id="txtAmount" layoutX="13.0" prefHeight="40.0" prefWidth="70.0" AnchorPane.bottomAnchor="16.0" />
                             <Label fx:id="lblDetailSymbol" layoutX="14.0048828125" layoutY="14.0" text="Symbol: " />
                             <Label fx:id="lblDetailName" layoutX="14.009765625" layoutY="39.5" text="Name: " />
                             <Label fx:id="lblDetailKurs" layoutX="14.0048828125" layoutY="64.5" text="Kurs: " />
@@ -75,7 +75,8 @@
                               <center>
                                 <ImageView fx:id="imgChart" fitHeight="276.5" fitWidth="339.6981201171875" pickOnBounds="true" preserveRatio="false" BorderPane.alignment="CENTER" />
                               </center>
-                            </BorderPane><Label fx:id="lbTransactionInfo" layoutX="14.509765625" layoutY="694.5" AnchorPane.bottomAnchor="70.0" />
+                            </BorderPane>
+                            <Label fx:id="lbTransactionInfo" layoutX="14.509765625" AnchorPane.bottomAnchor="70.0" />
                           </children>
                         </AnchorPane>
                       </content>
