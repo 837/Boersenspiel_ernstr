@@ -32,19 +32,17 @@ public class UserDao {
 			query.constrain(PlayerProfile.class);
 			query.descend("name").constrain(username);
 			ObjectSet<PlayerProfile> result = query.execute();
-
+			System.out.println("login: " + result.next().getName());
 			if (result.hasNext()) // found
 			{
 				// Search for user with pw
-				query = db.query();
-				query.constrain(PlayerProfile.class);
 				query.descend("password").constrain(password);
 				ObjectSet<PlayerProfile> resultWithPw = query.execute();
-
+				System.out.println("login pw : " + resultWithPw.next().getPassword());
 				if (resultWithPw.hasNext()) // found
 				{
 					setUser(resultWithPw.next());
-					System.out.println("loggedIn  " + username);
+					System.out.println("loggedIn  " + getUser().getName());
 					login = true;
 				}
 			} else {
@@ -77,9 +75,8 @@ public class UserDao {
 				signup = false;
 			} else {
 
-				db.store(new PlayerProfile(name, password, Integer.parseInt(startkapital)));
-				user = new PlayerProfile(name, password, Integer.parseInt(startkapital));
-			    db.store(user);
+				setUser(new PlayerProfile(name, password, Integer.parseInt(startkapital)));
+				db.store(getUser());
 				System.out.println("signed up");
 				signup = true;
 			}

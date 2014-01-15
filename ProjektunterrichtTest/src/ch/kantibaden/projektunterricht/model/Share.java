@@ -20,12 +20,26 @@ public class Share {
 	private StringProperty name = new SimpleStringProperty();
 	private StringProperty symbol = new SimpleStringProperty();
 	private StringProperty value = new SimpleStringProperty();
+	private StringProperty difference = new SimpleStringProperty();
 	private Image chart;
+	private BigDecimal oldValue;
 
 	public Share(String name, String symbol, BigDecimal value) {
 		this.name.set(name);
 		this.symbol.set(symbol);
 		this.value.set(value.toString());
+	}
+
+	public BigDecimal getOldValue() {
+		return oldValue;
+	}
+
+	public void setOldValue(BigDecimal oldValue) {
+		this.oldValue = oldValue;
+	}
+
+	public String getDifference() {
+		return difference.get();
 	}
 
 	public Image getChart() {

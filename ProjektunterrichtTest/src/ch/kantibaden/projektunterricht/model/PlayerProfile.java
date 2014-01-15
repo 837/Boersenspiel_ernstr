@@ -126,7 +126,7 @@ public class PlayerProfile {
 		return true;
 	}
 	
-	public boolean sell(Share shareToSell, int amount) {
+	public int sell(Share shareToSell, int amount) {
 		boolean couldSell = false;
 		
 		int actuallAmount = 0;
@@ -153,7 +153,7 @@ public class PlayerProfile {
 					+ shareToSell.getValue().multiply(new BigDecimal(amount)));
 			
 		}
-		return couldSell;
+		return actuallAmount;
 	}
 	
 }

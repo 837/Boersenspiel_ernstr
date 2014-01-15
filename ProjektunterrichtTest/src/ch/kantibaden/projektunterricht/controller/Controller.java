@@ -1,6 +1,7 @@
 package ch.kantibaden.projektunterricht.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -133,8 +134,18 @@ public class Controller {
 	private void handleBuy() {
 		if (!txtAmount.getText().isEmpty()) {
 			int amount = new Integer(txtAmount.getText());
-			player.buy(selectedShare, amount);
-			buySellActions();
+			if (player.buy(selectedShare, amount)) {
+				buySellActions();
+				lbTransactionInfo.setText("Gekauft: " + amount + " * " + selectedShare.getName() + "  "
+						+ selectedShare.getValue().multiply(new BigDecimal(amount))+" CHF");
+				lbTransactionInfo.setTextFill(Color.GREEN);
+
+			} else {
+				lbTransactionInfo.setText("Das können Sie nicht tun, Sie bräuchten: " + selectedShare.getValue().multiply(new BigDecimal(amount))
+						+ " CHF");
+				lbTransactionInfo.setTextFill(Color.RED);
+			}
+
 		}
 	}
 
@@ -142,8 +153,17 @@ public class Controller {
 	private void handleSell() {
 		if (!txtAmount.getText().isEmpty()) {
 			int amount = new Integer(txtAmount.getText());
-			player.sell(selectedShare, amount);
-			buySellActions();
+			int actuallAmount = player.sell(selectedShare, amount);
+			if (actuallAmount > 0) {
+				buySellActions();
+				lbTransactionInfo.setText("Verkauft: " + actuallAmount + " * " + selectedShare.getName() + "  "
+						+ selectedShare.getValue().multiply(new BigDecimal(actuallAmount))+" CHF");
+				lbTransactionInfo.setTextFill(Color.GREEN);
+
+			} else {
+				lbTransactionInfo.setText("Das können Sie nicht tun, es fehlen Ihnen die Aktien: " + selectedShare.getName());
+				lbTransactionInfo.setTextFill(Color.RED);
+			}
 		}
 	}
 
@@ -153,9 +173,10 @@ public class Controller {
 			shares.downloadAll();
 			btRefresh.setText("Aktualisiere Aktien");
 			btRefresh.setTextFill(Color.GREEN);
+			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		} catch (IOException e) {
 			e.printStackTrace();
-			btRefresh.setText("No connection, click again");
+			btRefresh.setText("Keine Verbindung, erneut versuchen");
 			btRefresh.setTextFill(Color.RED);
 		}
 	}
@@ -174,6 +195,7 @@ public class Controller {
 		lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
 		lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedAmountOfShare(selectedShare));
 		lblDetailTotalerWert.setText("Totaler Wert: " + player.getTotalValueOfShare(selectedShare).toString());
+		lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		imgChart.setImage(selectedShare.getChart());
 
 	}
@@ -247,5 +269,6 @@ public class Controller {
 	private ImageView imgChart;
 	@FXML
 	private BorderPane bpChart;
-
+	@FXML
+	private Label lbTransactionInfo;
 }
