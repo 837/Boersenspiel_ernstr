@@ -70,6 +70,7 @@ public class ShareManager {
 
 		for (Share currentShare : shares) {
 			System.out.println(currentShare.getName() + "  " + currentShare.getSymbol() + "  " + currentShare.getValue());
+			currentShare.setChart(null);
 		}
 	}
 

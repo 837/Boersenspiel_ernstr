@@ -30,7 +30,7 @@ public class Boersenspiel extends Application {
 			Scene mainScene = new Scene(root);
 			primaryStage.setScene(mainScene);
 			
-			primaryStage.setResizable(true);
+			primaryStage.setResizable(false);
 			Controller c =  loader.getController();
 			c.setStage(primaryStage);
 			c.setBoersenspiel(this);
