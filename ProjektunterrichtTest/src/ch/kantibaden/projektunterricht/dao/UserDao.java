@@ -1,5 +1,7 @@
 package ch.kantibaden.projektunterricht.dao;
 
+import java.math.BigDecimal;
+
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -75,7 +77,7 @@ public class UserDao {
 				signup = false;
 			} else {
 
-				setUser(new PlayerProfile(name, password, Integer.parseInt(startkapital)));
+				setUser(new PlayerProfile(name, password, new BigDecimal(startkapital)));
 				db.store(getUser());
 				System.out.println("signed up");
 				signup = true;

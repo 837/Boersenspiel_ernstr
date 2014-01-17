@@ -82,7 +82,7 @@ public class Controller {
 	private void initialize() throws IOException {
 		
 		shares = new ShareManager();
-		player = new PlayerProfile("", "", 0);
+		player = new PlayerProfile("", "", new BigDecimal(0));
 		
 		aaSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
 		aaName.setCellValueFactory(new PropertyValueFactory<Share, String>("name"));

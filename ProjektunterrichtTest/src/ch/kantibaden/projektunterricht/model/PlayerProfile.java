@@ -12,10 +12,10 @@ public class PlayerProfile {
 	private ArrayList<ShareContainer> ownedShares;
 	private ArrayList<Transaction> transactions;
 	
-	public PlayerProfile(String name, String password, int beginningBalance) {
+	public PlayerProfile(String name, String password, BigDecimal bigDecimal) {
 		this.name = name;
 		this.password = password;
-		this.beginningBalance = new BigDecimal(beginningBalance);
+		this.beginningBalance = bigDecimal;
 		this.balance = new BigDecimal(this.beginningBalance.toString());
 		this.ownedShares = new ArrayList<>();
 		this.transactions = new ArrayList<>();
@@ -28,13 +28,7 @@ public class PlayerProfile {
 		return name;
 	}
 	
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	
 	/**
 	 * @return the password
@@ -43,13 +37,7 @@ public class PlayerProfile {
 		return password;
 	}
 	
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	
 	/**
 	 * @return the balance
