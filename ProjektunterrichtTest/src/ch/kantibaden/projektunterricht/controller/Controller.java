@@ -107,10 +107,7 @@ public class Controller {
 		
 		// adding an eventListener for tvAlleAktien, used to select "selected".
 		tvAlleAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
-<<<<<<< HEAD
-=======
-			
->>>>>>> 390eaa6f70b45c5e161c2aa05e6a88ae7f007ba8
+
 			@Override
 			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
 				// Check whether item is selected and set value of selected item
@@ -125,10 +122,6 @@ public class Controller {
 		
 		// adding an eventListener for tvMeineAktien, used to select "selected".
 		tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
-<<<<<<< HEAD
-=======
-			
->>>>>>> 390eaa6f70b45c5e161c2aa05e6a88ae7f007ba8
 			@Override
 			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
 				// Check whether item is selected and set value of selected item
