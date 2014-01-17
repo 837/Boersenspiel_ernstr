@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,11 +14,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ch.kantibaden.projektunterricht.Boersenspiel;
@@ -53,7 +50,17 @@ public class Controller {
 		player = UserDao.getUser();
 		if (player == null) {
 			Platform.exit();
-		} else {
+		} else if (player.getBalance().doubleValue() + player.getTotalShareValue().doubleValue() <= 0) {
+			lblStartkapital.setText("SIE HABEN VERLOREN");
+			lblStartkapital.setTextFill(Color.RED);
+			lblMomentanesKapital.setText("IHR KAPITAL IST 0");
+			lblMomentanesKapital.setTextFill(Color.RED);
+			lblWertAllerAktien.setText("DER WERT DER AKTIEN IST 0");
+			lblWertAllerAktien.setTextFill(Color.RED);
+			lblBenutzername.setText("Benutzername: " + player.getName());
+		}
+
+		else {
 			tvAlleAktien.getItems().addAll(shares.getShares());
 
 			for (ShareContainer currentShare : player.getOwnedShares()) {
@@ -80,7 +87,6 @@ public class Controller {
 		aaSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
 		aaName.setCellValueFactory(new PropertyValueFactory<Share, String>("name"));
 		aaKurs.setCellValueFactory(new PropertyValueFactory<Share, String>("value"));
-		// MeineAktien
 		maSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
 		maName.setCellValueFactory(new PropertyValueFactory<Share, String>("name"));
 		maKurs.setCellValueFactory(new PropertyValueFactory<Share, String>("value"));
@@ -101,7 +107,6 @@ public class Controller {
 
 		// adding an eventListener for tvAlleAktien, used to select "selected".
 		tvAlleAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
 				// Check whether item is selected and set value of selected item
@@ -116,7 +121,6 @@ public class Controller {
 
 		// adding an eventListener for tvMeineAktien, used to select "selected".
 		tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Share> observableValue, Share oldValue, Share newValue) {
 				// Check whether item is selected and set value of selected item
@@ -176,7 +180,7 @@ public class Controller {
 			btRefresh.setTextFill(Color.GREEN);
 			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		} catch (IOException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			btRefresh.setText("Keine Verbindung, erneut versuchen");
 			btRefresh.setTextFill(Color.RED);
 		}
