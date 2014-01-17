@@ -25,9 +25,10 @@
                             <Label fx:id="" text="Meine Aktien" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="127.0" />
                             <TableView fx:id="tvMeineAktien" focusTraversable="true" prefHeight="396.0" prefWidth="375.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="156.0">
                               <columns>
-                                <TableColumn prefWidth="100.0" text="Symbol" fx:id="maSymbol" />
-                                <TableColumn prefWidth="150.0" text="Name" fx:id="maName" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" fx:id="maKurs" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="69.0" text="Symbol" fx:id="maSymbol" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="Name" fx:id="maName" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="83.0" text="Kurs" fx:id="maKurs" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" text="Veränderung" fx:id="maAenderung" />
                               </columns>
                             </TableView>
                             <Label fx:id="lblBenutzername" layoutX="14.0" layoutY="14.0" text="Benutzername:" />
@@ -41,9 +42,10 @@
                           <children>
                             <TableView id="tvMeineAktien" fx:id="tvAlleAktien" focusTraversable="true" prefHeight="505.0" prefWidth="375.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                               <columns>
-                                <TableColumn prefWidth="100.0" text="Symbol" fx:id="aaSymbol" />
-                                <TableColumn prefWidth="150.0" text="Name" fx:id="aaName" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Kurs" fx:id="aaKurs" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Symbol" fx:id="aaSymbol" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" text="Name" fx:id="aaName" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Kurs" fx:id="aaKurs" />
+                                <TableColumn prefWidth="95.0" text="Veränderung" fx:id="aaAenderung" />
                               </columns>
                             </TableView>
                           </children>
@@ -62,9 +64,8 @@
                       <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                            <Button fx:id="btKaufen" layoutX="100.0" mnemonicParsing="false" onAction="#handleBuy" prefHeight="40.0" prefWidth="70.0" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
-                            <Button fx:id="btVerkaufen" layoutX="187.0" mnemonicParsing="false" onAction="#handleSell" prefHeight="40.0" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
-                            <Button fx:id="btRefresh" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="40.0" prefWidth="315.0" text="Aktualisiere Aktien" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+                            <Button fx:id="btKaufen" layoutX="100.0" mnemonicParsing="false" onAction="#handleBuy" prefHeight="40.0" prefWidth="-1.0" style="" text="Kaufen" AnchorPane.bottomAnchor="16.0" />
+                            <Button fx:id="btVerkaufen" layoutX="190.0" mnemonicParsing="false" onAction="#handleSell" prefHeight="40.0" text="Verkaufen" AnchorPane.bottomAnchor="16.0" />
                             <TextField fx:id="txtAmount" layoutX="13.0" prefHeight="40.0" prefWidth="70.0" AnchorPane.bottomAnchor="16.0" />
                             <Label fx:id="lblDetailSymbol" layoutX="14.0048828125" layoutY="14.0" text="Symbol: " />
                             <Label fx:id="lblDetailName" layoutX="14.009765625" layoutY="39.5" text="Name: " />
@@ -73,7 +74,7 @@
                             <Label fx:id="lblDetailTotalerWert" layoutX="13.0" layoutY="111.0" text="Totaler Wert:" />
                             <BorderPane fx:id="bpChart" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="160.0">
                               <center>
-                                <ImageView fx:id="imgChart" fitHeight="276.5" fitWidth="339.6981201171875" pickOnBounds="true" preserveRatio="false" BorderPane.alignment="CENTER" />
+                                <ImageView fx:id="imgChart" fitHeight="276.5" fitWidth="573.34912109375" pickOnBounds="true" preserveRatio="false" BorderPane.alignment="CENTER" />
                               </center>
                             </BorderPane>
                             <Label fx:id="lbTransactionInfo" layoutX="14.509765625" AnchorPane.bottomAnchor="70.0" />
@@ -88,6 +89,14 @@
           </items>
         </SplitPane>
       </center>
+      <top>
+        <Pane prefHeight="31.0" prefWidth="1080.0" style=" -fx-background-color: &#10;        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),&#10;        linear-gradient(#020b02, #3a3a3a),&#10;        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),&#10;        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),&#10;        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);&#10;">
+          <children>
+            <Button fx:id="btRefresh" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleRefresh" text="Aktualisiere alle Aktien" />
+            <Button id="btTrans" fx:id="btTransactions" layoutX="920.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleTransactions" text="Transaktionen anzeigen" />
+          </children>
+        </Pane>
+      </top>
     </BorderPane>
   </children>
 </AnchorPane>

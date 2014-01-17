@@ -6,16 +6,20 @@ import java.math.BigDecimal;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBuilder;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -27,7 +31,7 @@ import ch.kantibaden.projektunterricht.model.ShareContainer;
 import ch.kantibaden.projektunterricht.model.ShareManager;
 
 public class Controller {
-	
+
 	private Stage stage;
 	private Boersenspiel boersenspiel;
 	private PlayerProfile player = null;
@@ -36,15 +40,15 @@ public class Controller {
 	private final String MOMENTANES_KAPITAL = "Momentanes Kapital: ";
 	private final String WERT_ALLER_AKTIEN = "Wert aller Aktien: ";
 	private Share selectedShare;
-	
+
 	public void setBoersenspiel(Boersenspiel b) {
 		this.boersenspiel = b;
 	}
-	
+
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
-	
+
 	public void login() throws Exception {
 		boersenspiel.login(player, shares);
 		player = UserDao.getUser();
@@ -62,7 +66,7 @@ public class Controller {
 
 		else {
 			tvAlleAktien.getItems().addAll(shares.getShares());
-			
+
 			for (ShareContainer currentShare : player.getOwnedShares()) {
 				tvMeineAktien.getItems().addAll(currentShare.getShare());
 			}
@@ -70,27 +74,29 @@ public class Controller {
 			lblMomentanesKapital.setText(MOMENTANES_KAPITAL + " " + player.getBalance().toString() + " CHF");
 			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 			lblBenutzername.setText("Benutzername: " + player.getName());
-			
+
 			imgChart.setPreserveRatio(true);
 			imgChart.fitWidthProperty().bind(stage.widthProperty());
 			// imgChart.fitHeightProperty().bind(stage.heightProperty());
 			bpChart.setCenter(imgChart);
 		}
 	}
-	
+
 	@FXML
 	private void initialize() throws IOException {
-		
+
 		shares = new ShareManager();
 		player = new PlayerProfile("", "", new BigDecimal(0));
-		
+
 		aaSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
 		aaName.setCellValueFactory(new PropertyValueFactory<Share, String>("name"));
 		aaKurs.setCellValueFactory(new PropertyValueFactory<Share, String>("value"));
+		aaAenderung.setCellValueFactory(new PropertyValueFactory<Share, String>("difference"));
 		maSymbol.setCellValueFactory(new PropertyValueFactory<Share, String>("symbol"));
 		maName.setCellValueFactory(new PropertyValueFactory<Share, String>("name"));
 		maKurs.setCellValueFactory(new PropertyValueFactory<Share, String>("value"));
-		
+		maAenderung.setCellValueFactory(new PropertyValueFactory<Share, String>("difference"));
+
 		// adding an eventfilter to txtAmount(textfield)
 		txtAmount.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
 			@Override
@@ -104,7 +110,7 @@ public class Controller {
 				}
 			}
 		});
-		
+
 		// adding an eventListener for tvAlleAktien, used to select "selected".
 		tvAlleAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
 
@@ -117,9 +123,9 @@ public class Controller {
 					updateDetails();
 				}
 			}
-			
+
 		});
-		
+
 		// adding an eventListener for tvMeineAktien, used to select "selected".
 		tvMeineAktien.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Share>() {
 			@Override
@@ -131,11 +137,10 @@ public class Controller {
 					updateDetails();
 				}
 			}
-			
+
 		});
-		
 	}
-	
+
 	@FXML
 	private void handleBuy() {
 		if (!txtAmount.getText().isEmpty()) {
@@ -145,16 +150,16 @@ public class Controller {
 				lbTransactionInfo.setText("Gekauft: " + amount + " * " + selectedShare.getName() + "  "
 						+ selectedShare.getValue().multiply(new BigDecimal(amount)) + " CHF");
 				lbTransactionInfo.setTextFill(Color.GREEN);
-				
+
 			} else {
-				lbTransactionInfo.setText("Das können Sie nicht tun, Sie bräuchten: "
-						+ selectedShare.getValue().multiply(new BigDecimal(amount)) + " CHF");
+				lbTransactionInfo.setText("Das können Sie nicht tun, Sie bräuchten: " + selectedShare.getValue().multiply(new BigDecimal(amount))
+						+ " CHF");
 				lbTransactionInfo.setTextFill(Color.RED);
 			}
-			
+
 		}
 	}
-	
+
 	@FXML
 	private void handleSell() {
 		if (!txtAmount.getText().isEmpty()) {
@@ -165,14 +170,14 @@ public class Controller {
 				lbTransactionInfo.setText("Verkauft: " + actuallAmount + " * " + selectedShare.getName() + "  "
 						+ selectedShare.getValue().multiply(new BigDecimal(actuallAmount)) + " CHF");
 				lbTransactionInfo.setTextFill(Color.GREEN);
-				
+
 			} else {
 				lbTransactionInfo.setText("Das können Sie nicht tun, es fehlen Ihnen die Aktien: " + selectedShare.getName());
 				lbTransactionInfo.setTextFill(Color.RED);
 			}
 		}
 	}
-	
+
 	@FXML
 	private void handleRefresh() {
 		try {
@@ -180,18 +185,36 @@ public class Controller {
 			btRefresh.setText("Aktualisiere Aktien");
 			btRefresh.setTextFill(Color.GREEN);
 			lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
-			if(selectedShare != null){
+			if (selectedShare != null) {
 				lblDetailKurs.setText("Kurs: " + selectedShare.getValue().toString());
 				lblDetailTotalerWert.setText("Totaler Wert: " + player.getTotalValueOfShare(selectedShare).toString());
 				imgChart.setImage(selectedShare.getChart());
 			}
+
+			// WORKAROUND
+			for (int i = 0; i < 4; i++) {
+				tvMeineAktien.getColumns().get(i).setVisible(false);
+				tvMeineAktien.getColumns().get(i).setVisible(true);
+				tvAlleAktien.getColumns().get(i).setVisible(false);
+				tvAlleAktien.getColumns().get(i).setVisible(true);
+			}
+
 		} catch (IOException e) {
 			// e.printStackTrace();
 			btRefresh.setText("Keine Verbindung, erneut versuchen");
 			btRefresh.setTextFill(Color.RED);
 		}
 	}
-	
+
+	@FXML
+	private void handleTransactions() {
+		try {
+			Runtime.getRuntime().exec("notepad " + UserDao.getUser().getName() + "_Transactions.txt");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	private void updateDetails() {
 		lblDetailSymbol.setText("Symbol: " + selectedShare.getSymbol());
 		lblDetailName.setText("Name: " + selectedShare.getName());
@@ -200,54 +223,85 @@ public class Controller {
 		lblDetailTotalerWert.setText("Totaler Wert: " + player.getTotalValueOfShare(selectedShare).toString());
 		lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		imgChart.setImage(selectedShare.getChart());
-		
 	}
-	
+
 	private void buySellActions() {
 		lblDetailAnzahl.setText("Anzahl die ich besitze: " + player.getOwnedAmountOfShare(selectedShare));
 		lblMomentanesKapital.setText(MOMENTANES_KAPITAL + " " + player.getBalance().toString() + " CHF");
 		lblWertAllerAktien.setText(WERT_ALLER_AKTIEN + " " + player.getTotalShareValue().toString() + " CHF");
 		lblDetailTotalerWert.setText("Totaler Wert: " + player.getTotalValueOfShare(selectedShare).toString());
 		txtAmount.setText("");
-		
+
 		tvMeineAktien.getItems().clear();
 		for (ShareContainer currentShare : player.getOwnedShares()) {
 			tvMeineAktien.getItems().addAll(currentShare.getShare());
 		}
 		UserDao.saveUser(player);
 	}
-	
+
 	public Controller() {
-		
+
 	}
-	
+
 	// Home
-	@FXML private Label lblStartkapital;
-	@FXML private Label lblMomentanesKapital;
-	@FXML private Label lblWertAllerAktien;
-	@FXML private Label lblBenutzername;
-	@FXML private TableView<Share> tvMeineAktien;
-	@FXML private TableColumn<Share, String> maSymbol;
-	@FXML private TableColumn<Share, String> maName;
-	@FXML private TableColumn<Share, String> maKurs;
-	
+	@FXML
+	private Label lblStartkapital;
+	@FXML
+	private Label lblMomentanesKapital;
+	@FXML
+	private Label lblWertAllerAktien;
+	@FXML
+	private Label lblBenutzername;
+	@FXML
+	private TableView<Share> tvMeineAktien;
+	@FXML
+	private TableColumn<Share, String> maSymbol;
+	@FXML
+	private TableColumn<Share, String> maName;
+	@FXML
+	private TableColumn<Share, String> maKurs;
+	@FXML
+	private TableColumn<Share, String> maAenderung;
+
 	// Alle Aktien
-	@FXML private TableView<Share> tvAlleAktien;
-	@FXML private TableColumn<Share, String> aaSymbol;
-	@FXML private TableColumn<Share, String> aaName;
-	@FXML private TableColumn<Share, String> aaKurs;
-	@FXML private Button btRefresh;
-	
+	@FXML
+	private TableView<Share> tvAlleAktien;
+	@FXML
+	private TableColumn<Share, String> aaSymbol;
+	@FXML
+	private TableColumn<Share, String> aaName;
+	@FXML
+	private TableColumn<Share, String> aaKurs;
+	@FXML
+	private TableColumn<Share, String> aaAenderung;
+
 	// Details Aktie
-	@FXML private Label lblDetailSymbol;
-	@FXML private Label lblDetailName;
-	@FXML private Label lblDetailKurs;
-	@FXML private Label lblDetailAnzahl;
-	@FXML private Label lblDetailTotalerWert;
-	@FXML private Button btKaufen;
-	@FXML private Button btVerkaufen;
-	@FXML private TextField txtAmount;
-	@FXML private ImageView imgChart;
-	@FXML private BorderPane bpChart;
-	@FXML private Label lbTransactionInfo;
+	@FXML
+	private Label lblDetailSymbol;
+	@FXML
+	private Label lblDetailName;
+	@FXML
+	private Label lblDetailKurs;
+	@FXML
+	private Label lblDetailAnzahl;
+	@FXML
+	private Label lblDetailTotalerWert;
+	@FXML
+	private Button btKaufen;
+	@FXML
+	private Button btVerkaufen;
+	@FXML
+	private TextField txtAmount;
+	@FXML
+	private ImageView imgChart;
+	@FXML
+	private BorderPane bpChart;
+	@FXML
+	private Label lbTransactionInfo;
+
+	// MenuBar
+	@FXML
+	private Button btRefresh;
+	@FXML
+	private Button btTransactions;
 }

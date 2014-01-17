@@ -1,7 +1,5 @@
 package ch.kantibaden.projektunterricht.test;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
 import org.junit.After;

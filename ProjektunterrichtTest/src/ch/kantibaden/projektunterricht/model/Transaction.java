@@ -1,12 +1,9 @@
 package ch.kantibaden.projektunterricht.model;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.math.BigDecimal;
 import java.util.Date;
 

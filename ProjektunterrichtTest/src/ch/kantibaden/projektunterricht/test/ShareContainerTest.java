@@ -1,9 +1,8 @@
 package ch.kantibaden.projektunterricht.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,9 +10,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ch.kantibaden.projektunterricht.dao.UserDao;
-import ch.kantibaden.projektunterricht.model.PlayerProfile;
-import ch.kantibaden.projektunterricht.model.Share;
 import ch.kantibaden.projektunterricht.model.ShareContainer;
 import ch.kantibaden.projektunterricht.model.ShareManager;
 
