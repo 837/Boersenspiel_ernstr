@@ -34,22 +34,20 @@ public class Share {
 		return oldValue;
 	}
 
-	public void setOldValue(BigDecimal oldValue) {
-		this.oldValue = oldValue;
-	}
-
 	public String getDifference() {
 		return difference.get();
 	}
 
 	public Image getChart() {
 		if (chart == null) {
-			setChart(new Image(getImagePath()));
+			chart = new Image("http://chart.finance.yahoo.com/z?s="
+					+ symbol.get().replaceAll("\"", "")
+					+ "&t=2m&q=l&l=on&z=l&p=m20,m50,m200");
 		}
 		return chart;
 	}
-
-	public void setChart(Image chart) {
+	
+	public void setChart(Image chart){
 		this.chart = chart;
 	}
 
@@ -67,36 +65,6 @@ public class Share {
 
 	public void setValue(BigDecimal newValue) {
 		this.value.set(newValue.toString());
-	}
-
-	public String getImagePath() {
-		return "http://chart.finance.yahoo.com/z?s=" + symbol.get().replaceAll("\"", "") + "&t=2m&q=l&l=on&z=l&p=m20,m50,m200";
-	}
-
-	public void downloadImage() {
-		try {
-			URL url = new URL("http://chart.finance.yahoo.com/z?s=" + symbol.get().replaceAll("\"", "") + "&t=2m&q=l&l=on&z=l&p=m20,m50,m200");
-
-			InputStream in = new BufferedInputStream(url.openStream());
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			byte[] buf = new byte[1024];
-			int n = 0;
-			while (-1 != (n = in.read(buf))) {
-				out.write(buf, 0, n);
-			}
-			out.close();
-			in.close();
-			byte[] response = out.toByteArray();
-
-			// save image
-			FileOutputStream fos = new FileOutputStream("Charts\\" + symbol.get().replace('\"', ' ') + "_Chart.png");
-			fos.write(response);
-			fos.close();
-
-			System.out.println("Chart für " + symbol + " heruntergeladen.");
-		} catch (IOException e) {
-			System.out.println("Ein Fehler!! in downloadImage " + symbol + "   " + e);
-		}
 	}
 
 }

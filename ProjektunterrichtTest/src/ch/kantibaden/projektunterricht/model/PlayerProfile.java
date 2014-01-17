@@ -100,7 +100,7 @@ public class PlayerProfile {
 		System.out.println(getBalance());
 		this.balance = getBalance().subtract(shareToBuy.getValue().multiply(new BigDecimal(amount)));
 		System.out.println(getBalance());
-		transactions.add(new Transaction(shareToBuy, amount));
+		transactions.add(new Transaction(shareToBuy, amount, balance.add(getTotalShareValue())));
 		System.out.println("Just bought: " + amount + " " + shareToBuy.getName() + "  "
 				+ shareToBuy.getValue().multiply(new BigDecimal(amount)));
 		
@@ -136,7 +136,7 @@ public class PlayerProfile {
 			System.out.println(getBalance());
 			this.balance = getBalance().add(shareToSell.getValue().multiply(new BigDecimal(actuallAmount)));
 			System.out.println(getBalance());
-			transactions.add(new Transaction(shareToSell, -actuallAmount));
+			transactions.add(new Transaction(shareToSell, -actuallAmount, balance.add(getTotalShareValue())));
 			System.out.println("Just sold: " + actuallAmount + " " + shareToSell.getName() + "  "
 					+ shareToSell.getValue().multiply(new BigDecimal(amount)));
 			

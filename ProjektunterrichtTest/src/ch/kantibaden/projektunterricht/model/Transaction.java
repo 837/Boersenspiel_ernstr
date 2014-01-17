@@ -16,8 +16,8 @@ public class Transaction {
 	private ShareContainer shares;
 	private Date date;
 
-	public Transaction(Share share, int amount) {
-		this.shares = new ShareContainer(share, amount);// negatice amount means
+	public Transaction(Share share, int amount, BigDecimal playerCapital) {
+		this.shares = new ShareContainer(share, amount);// negative amount means
 														// sell
 		date = new Date();
 		System.out.println("TRANSACTION: " + date + "  " + share.getName() + "  " + share.getValue().multiply(new BigDecimal(amount)));
@@ -25,7 +25,7 @@ public class Transaction {
 		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(UserDao.getUser().getName()+"_Transactions.txt",
 				true)))) {
 			out.println("TRANSACTION: " + date);
-			if (share.getValue().multiply(new BigDecimal(amount)).intValue() < 0) {
+			if (amount < 0) {
 				out.println("TYP: VERKAUF");
 				amount *= -1;
 			} else {
@@ -35,6 +35,8 @@ public class Transaction {
 			out.println("MENGE: " + amount);
 			out.println("EINZELNER WERT: " + share.getValue());
 			out.println("TOTALER WERT: " + share.getValue().multiply(new BigDecimal(amount)));
+			out.println("******************************************************************");
+			out.println("Neues Gesamtkapital: " + playerCapital);
 			out.println("******************************************************************");
 
 		} catch (IOException e) {
