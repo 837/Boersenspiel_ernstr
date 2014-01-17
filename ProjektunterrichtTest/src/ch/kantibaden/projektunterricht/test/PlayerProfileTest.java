@@ -3,6 +3,7 @@ package ch.kantibaden.projektunterricht.test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,18 +12,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.kantibaden.projektunterricht.model.PlayerProfile;
+import ch.kantibaden.projektunterricht.model.Share;
 import ch.kantibaden.projektunterricht.model.ShareManager;
 
 public class PlayerProfileTest {
 	
 	private static PlayerProfile player;
-	private static ShareManager shares;
+	private static ShareManager shareManager;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		player = new PlayerProfile("name", "password", new BigDecimal(1000));
-		shares = new ShareManager();
-		
+		shareManager = new ShareManager();
+		shareManager.downloadAll();
+		ArrayList<Share> shares = shareManager.getShares();
 	}
 
 	@AfterClass
