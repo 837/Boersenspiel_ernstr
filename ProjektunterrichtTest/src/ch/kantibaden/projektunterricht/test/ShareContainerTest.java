@@ -52,7 +52,8 @@ public class ShareContainerTest {
 	public void testBuy() {
 		shareContainer.buy(1);
 		
-		assertEquals(shareContainer.getAmount(), 3);
+		assertEquals(shareContainer.getAmount(), 3);//Amount correct
+		assertEquals(shareContainer.getPayedPrice(), shareContainer.getShare().getValue().multiply(new BigDecimal(3)));//Value correct
 		
 		shareContainer.sell(1);//Ensure it's always 2
 		
@@ -62,7 +63,8 @@ public class ShareContainerTest {
 	public void testSell() {
 		shareContainer.sell(1);
 		
-		assertEquals(shareContainer.getAmount(), 1);
+		assertEquals(shareContainer.getAmount(), 1);//Amount correct
+		assertEquals(shareContainer.getPayedPrice(), shareContainer.getShare().getValue());//Value correct
 		
 		shareContainer.buy(1);//Ensure it's always 2
 	}
