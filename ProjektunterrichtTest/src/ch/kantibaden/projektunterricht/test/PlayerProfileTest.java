@@ -74,6 +74,7 @@ public class PlayerProfileTest {
 	public void testSell() {
 		player.sell(share, 1);
 		assertEquals(player.getOwnedAmountOfShare(share), 1);
+		player.buy(share, 1);//to ensure he always owns 2;
 	}
 	
 	@Test

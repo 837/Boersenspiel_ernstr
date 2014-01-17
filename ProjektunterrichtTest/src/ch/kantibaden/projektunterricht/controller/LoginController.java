@@ -78,7 +78,7 @@ public class LoginController {
 		lbInfoSignup.setText("");
 		if (txtUsernameSignup.getText().isEmpty() || pwPasswordSignup.getText().isEmpty() || txtStartkapital.getText().isEmpty()) {
 			lbInfoSignup.setText("Alle drei Felder müssen ausgefüllt sein.");
-		} else if (!UserDao.signup(txtUsernameSignup.getText(), pwPasswordSignup.getText(), txtStartkapital.getText())) {
+		} else if (UserDao.getUser() == null && !UserDao.signup(txtUsernameSignup.getText(), pwPasswordSignup.getText(), txtStartkapital.getText())) {
 			lbInfoSignup.setText("Username wird bereits verwendet.");
 		} else {
 			player = UserDao.getUser();

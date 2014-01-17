@@ -12,16 +12,8 @@ public class ShareManager {
 
 	private ArrayList<Share> shares = new ArrayList<Share>();
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
-
-	public ShareManager(ArrayList<ShareContainer> playerShares) throws IOException {
-		for (ShareContainer currentShareContainer : playerShares) {
-			shares.add(currentShareContainer.getShare());
-		}
-		downloadAll();
-	}
 	
 	public ShareManager(){
-		
 	}
 	
 	public void loadPlayerShares(ArrayList<ShareContainer> playerShares) throws IOException {

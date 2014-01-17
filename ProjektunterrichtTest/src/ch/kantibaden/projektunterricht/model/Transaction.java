@@ -15,11 +15,12 @@ import ch.kantibaden.projektunterricht.dao.UserDao;
 public class Transaction {
 	private ShareContainer shares;
 	private Date date;
+	private BigDecimal balance;
 
 	public Transaction(Share share, int amount, BigDecimal playerCapital) {
-		this.shares = new ShareContainer(share, amount);// negative amount means
-														// sell
-		date = new Date();
+		this.shares = new ShareContainer(share, amount);// negative amount means sell
+		this.date = new Date();
+		this.balance = playerCapital;
 		System.out.println("TRANSACTION: " + date + "  " + share.getName() + "  " + share.getValue().multiply(new BigDecimal(amount)));
 
 		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(UserDao.getUser().getName()+"_Transactions.txt",

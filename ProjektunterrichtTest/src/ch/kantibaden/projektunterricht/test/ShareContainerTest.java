@@ -14,9 +14,12 @@ import org.junit.Test;
 import ch.kantibaden.projektunterricht.dao.UserDao;
 import ch.kantibaden.projektunterricht.model.PlayerProfile;
 import ch.kantibaden.projektunterricht.model.Share;
+import ch.kantibaden.projektunterricht.model.ShareContainer;
 import ch.kantibaden.projektunterricht.model.ShareManager;
 
 public class ShareContainerTest {
+	
+	private static ShareContainer shareContainer;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -29,9 +32,8 @@ public class ShareContainerTest {
 			} catch (Exception e) {
 			}
 		}
-		ArrayList<Share> shares = shareManager.getShares();
-		share = shares.get(0);
-		player.buy(share, 2);
+		
+		shareContainer = new ShareContainer(shareManager.getShares().get(0), 2);
 	}
 
 	@AfterClass
@@ -48,17 +50,21 @@ public class ShareContainerTest {
 
 	@Test
 	public void testBuy() {
-		fail("Not yet implemented");
+		shareContainer.buy(1);
+		
+		assertEquals(shareContainer.getAmount(), 3);
+		
+		shareContainer.sell(1);//Ensure it's always 2
+		
 	}
 
 	@Test
 	public void testSell() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsEmpty() {
-		fail("Not yet implemented");
+		shareContainer.sell(1);
+		
+		assertEquals(shareContainer.getAmount(), 1);
+		
+		shareContainer.buy(1);//Ensure it's always 2
 	}
 
 }

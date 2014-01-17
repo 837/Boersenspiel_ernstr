@@ -1,11 +1,16 @@
 package ch.kantibaden.projektunterricht.test;
 
 import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import ch.kantibaden.projektunterricht.model.ShareManager;
 
 public class ShareManagerTest {
 
@@ -25,9 +30,14 @@ public class ShareManagerTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testRefreshAll() {
-		fail("Not yet implemented");
+	@Test(timeout=2000)
+	public void testDownloadAll() {
+		ShareManager shares = new ShareManager();
+		try {
+			shares.downloadAll();
+		} catch (IOException e) {
+			
+		}
 	}
 
 }
