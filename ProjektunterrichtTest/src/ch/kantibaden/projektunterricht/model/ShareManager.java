@@ -1,21 +1,26 @@
 package ch.kantibaden.projektunterricht.model;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ShareManager {
 
 	private ArrayList<Share> shares = new ArrayList<Share>();
 	private final String ALL_SHARES = "%40%5EDJI,%40%5EGDAXI,GOOG";
-	
-	public ShareManager(){
+	private Random rnd = new Random();
+	private String csvFile = "Shares\1.csv";
+
+	public ShareManager() {
 	}
-	
+
 	public void loadPlayerShares(ArrayList<ShareContainer> playerShares) throws IOException {
 		for (ShareContainer currentShareContainer : playerShares) {
 			shares.add(currentShareContainer.getShare());
@@ -23,16 +28,23 @@ public class ShareManager {
 		downloadAll();
 	}
 
+	private void getRndCsv() {
+
+		csvFile = "Shares\\" + rnd.nextInt(4) + ".csv";
+	}
+
 	public void downloadAll() throws IOException {
-		// download all shares
-		String downloadLink = "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES + "&f=l1s0n0&e=.csv";
-		System.out.println(downloadLink);
-		URL url = new URL(downloadLink);
-		URLConnection connection = url.openConnection();
-		connection.setConnectTimeout(2000);// timeout after 2sec
-		connection.setReadTimeout(2000);
-		connection.connect();
-		BufferedReader bufferedCSV = new BufferedReader(new InputStreamReader(url.openStream()));
+		/*
+		 * // download all shares String downloadLink =
+		 * "http://download.finance.yahoo.com/d/quotes.csv?s=" + ALL_SHARES +
+		 * "&f=l1s0n0&e=.csv"; System.out.println(downloadLink); URL url = new
+		 * URL(downloadLink); URLConnection connection = url.openConnection();
+		 * connection.setConnectTimeout(2000);// timeout after 2sec
+		 * connection.setReadTimeout(2000); connection.connect();
+		 */
+
+		getRndCsv();
+		BufferedReader bufferedCSV = new BufferedReader(new FileReader(csvFile));
 
 		String line;
 		while ((line = bufferedCSV.readLine()) != null) {
