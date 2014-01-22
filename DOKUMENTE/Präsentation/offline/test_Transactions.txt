@@ -1,0 +1,36 @@
+TRANSACTION: Wed Jan 22 11:25:22 CET 2014
+TYP: KAUF
+AKTIE: Caterpillar Inc.
+MENGE: 2
+EINZELNER WERT: 91.44
+TOTALER WERT: 182.88
+******************************************************************
+Neues Gesamtkapital: 99817.12
+******************************************************************
+TRANSACTION: Wed Jan 22 11:25:28 CET 2014
+TYP: KAUF
+AKTIE: Google Inc.
+MENGE: 1
+EINZELNER WERT: 1150.53
+TOTALER WERT: 1150.53
+******************************************************************
+Neues Gesamtkapital: 98849.47
+******************************************************************
+TRANSACTION: Wed Jan 22 11:28:46 CET 2014
+TYP: KAUF
+AKTIE: Google Inc.
+MENGE: 2
+EINZELNER WERT: 1150.53
+TOTALER WERT: 2301.06
+******************************************************************
+Neues Gesamtkapital: 97698.94
+******************************************************************
+TRANSACTION: Wed Jan 22 11:29:09 CET 2014
+TYP: VERKAUF
+AKTIE: Google Inc.
+MENGE: 2
+EINZELNER WERT: 1150.53
+TOTALER WERT: 2301.06
+******************************************************************
+Neues Gesamtkapital: 100000.00
+******************************************************************
